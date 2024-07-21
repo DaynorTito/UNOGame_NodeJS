@@ -1,0 +1,18 @@
+{
+  "name": "unogame_nodejs",
+  "version": "1.0.0",
+  "description": "UnoGame using api's requests with NodeJS",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daynor Tito",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.10.3",
+    "sequelize": "^6.37.3"
+  }
+}
