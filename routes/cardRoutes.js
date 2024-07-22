@@ -1,4 +1,4 @@
-import { Route } from "express";
+import { Router } from "express";
 import {
     createCard,
     getCards,
@@ -9,11 +9,11 @@ import {
 
 const router = Router();
 
-router.post('/api/v1/cards', createCard);
-router.get('/api/v1/cards', getCards);
-router.get('/api/v1/cards/:id', getCardById);
-router.put('/api/v1/cards/:id', updateCard);
-router.delete('/api/v1/cards/:id', deleteCard);
+router.post('/cards', createCard);
+router.get('/cards', getCards);
+router.get('/cards/:id', getCardById);
+router.put('/cards/:id', updateCard);
+router.delete('/cards/:id', deleteCard);
 
 
 export default router;

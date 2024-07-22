@@ -1,4 +1,4 @@
-import { Route } from "express";
+import { Router } from "express";
 import {
     createScore,
     getScores,
@@ -9,11 +9,11 @@ import {
 
 const router = Router();
 
-router.post('/api/v1/scores', createScore);
-router.get('/api/v1/scores', getScores);
-router.get('/api/v1/scores/:id', getScoreById);
-router.put('/api/v1/scores/:id', updateScore);
-router.delete('/api/v1/scores/:id', deleteScore);
+router.post('/scores', createScore);
+router.get('/scores', getScores);
+router.get('/scores/:id', getScoreById);
+router.put('/scores/:id', updateScore);
+router.delete('/scores/:id', deleteScore);
 
 
 export default router;

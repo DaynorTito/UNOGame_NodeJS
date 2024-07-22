@@ -1,4 +1,4 @@
-import { Route } from "express";
+import { Router } from "express";
 import {
     createGame,
     getGames,
@@ -9,11 +9,11 @@ import {
 
 const router = Router();
 
-router.post('/api/v1/games', createGame);
-router.get('/api/v1/games', getGames);
-router.get('/api/v1/games/:id', getGameById);
-router.put('/api/v1/games/:id', updateGame);
-router.delete('/api/v1/games/:id', deleteGame);
+router.post('/games', createGame);
+router.get('/games', getGames);
+router.get('/games/:id', getGameById);
+router.put('/games/:id', updateGame);
+router.delete('/games/:id', deleteGame);
 
 
 export default router;

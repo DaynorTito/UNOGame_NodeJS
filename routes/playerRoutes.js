@@ -1,4 +1,4 @@
-import { Route } from "express";
+import { Router } from "express";
 import {
     createPlayer,
     getPlayers,
@@ -9,11 +9,11 @@ import {
 
 const router = Router();
 
-router.post('/api/v1/players', createPlayer);
-router.get('/api/v1/players', getPlayers);
-router.get('/api/v1/players/:id', getPlayerById);
-router.put('/api/v1/players/:id', updatePlayer);
-router.delete('/api/v1/players/:id', deletePlayer);
+router.post('/players', createPlayer);
+router.get('/players', getPlayers);
+router.get('/players/:id', getPlayerById);
+router.put('/players/:id', updatePlayer);
+router.delete('/players/:id', deletePlayer);
 
 
 export default router;
