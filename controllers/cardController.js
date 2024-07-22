@@ -4,7 +4,7 @@ import {
     getCardByIdService, 
     updateCardService, 
     deleteCardService
-} from "../services/cardService";
+} from "../services/cardService.js";
 
 const createCard = async (req, res, next) => {
     try {

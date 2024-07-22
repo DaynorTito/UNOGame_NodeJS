@@ -1,4 +1,4 @@
-import Game from "../models/game";
+import Game from "../models/game.js";
 
 const createGameService = async (GameData) => {
     return await Game.create(GameData);

@@ -5,7 +5,7 @@ import {
     getPlayerById,
     updatePlayer,
     deletePlayer
-} from "../controllers/playerController";
+} from "../controllers/playerController.js";
 
 const router = Router();
 

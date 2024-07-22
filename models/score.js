@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/database";
-import Player from "./player";
-import Game from "./game";
+import sequelize from "../config/database.js";
+import Player from "./player.js";
+import Game from "./game.js";
 
 const Score = sequelize.define('Score', {
     id: {

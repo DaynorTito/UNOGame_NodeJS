@@ -1,4 +1,4 @@
-import Card from "../models/card";
+import Card from "../models/card.js";
 
 const createCardService = async (cardData) => {
     return await Card.create(cardData);

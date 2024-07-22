@@ -5,7 +5,7 @@ import {
     getGameById,
     updateGame,
     deleteGame
-} from "../controllers/gameController";
+} from "../controllers/gameController.js";
 
 const router = Router();
 

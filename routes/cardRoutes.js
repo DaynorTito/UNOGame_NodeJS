@@ -5,7 +5,7 @@ import {
     getCardById,
     updateCard,
     deleteCard
-} from "../controllers/cardController";
+} from "../controllers/cardController.js";
 
 const router = Router();
 

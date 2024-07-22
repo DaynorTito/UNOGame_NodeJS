@@ -1,4 +1,4 @@
-import Player from "../models/player";
+import Player from "../models/player.js";
 
 const createPlayerService = async (playerData) => {
     return await Player.create(playerData);

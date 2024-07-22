@@ -4,7 +4,7 @@ import {
     getGameByIdService, 
     updateGameService, 
     deleteGameService
-} from "../services/gameService";
+} from "../services/gameService.js";
 
 const createGame = async (req, res, next) => {
     try {

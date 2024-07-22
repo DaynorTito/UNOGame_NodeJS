@@ -5,7 +5,7 @@ import {
     getScoreById,
     updateScore,
     deleteScore
-} from "../controllers/scoreController";
+} from "../controllers/scoreController.js";
 
 const router = Router();
 

@@ -4,7 +4,7 @@ import {
     getPlayerByIdService, 
     updatePlayerService, 
     deletePlayerService
-} from "../services/playerService";
+} from "../services/playerService.js";
 
 const createPlayer = async (req, res, next) => {
     try {

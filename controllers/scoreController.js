@@ -3,7 +3,7 @@ import { createScoreService,
     getScoreByIdService, 
     updateScoreService, 
     deleteScoreService
-} from "../services/scoreService";
+} from "../services/scoreService.js";
 
 const createScore = async (req, res, next) => {
     try {

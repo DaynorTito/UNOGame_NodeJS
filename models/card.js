@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize";
-import sequelize from "../config/database";
-import Game from "./game";
+import sequelize from "../config/database.js";
+import Game from "./game.js";
 
 const Card = sequelize.define('Card', {
     id: {
