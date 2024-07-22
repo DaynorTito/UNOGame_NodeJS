@@ -2,7 +2,7 @@
 
 This project implements an API for the classic card game UNO, where there are several games, players and scores. It makes use of NodeJS with Express for the creation of the server and Sequelize with ORM for the interaction with a MySQL database, so that the interaction is efficient.
 
-![alt text](/utils/images/readme/image.png)x
+![alt text](/src/utils/images/readme/image.png)
 
 This game consists of getting rid of all the cards you start the game with, which are seven, plus those you “draw” during the game. Each time a player does not have a card of the color or number drawn or a joker, he must take a card from the deck.
 
