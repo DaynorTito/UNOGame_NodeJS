@@ -1,8 +1,10 @@
-import { createCardService, 
+import { 
+    createCardService, 
     getCardsService, 
     getCardByIdService, 
     updateCardService, 
-    deleteCardService} from "../services/cardService"
+    deleteCardService
+} from "../services/cardService";
 
 const createCard = async (req, res, next) => {
     try {

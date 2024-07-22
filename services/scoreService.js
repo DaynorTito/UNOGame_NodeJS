@@ -1,4 +1,4 @@
-import Score from "../models/Score"
+import Score from "../models/Score";
 
 const createScoreService = async (ScoreData) => {
     return await Score.create(ScoreData);

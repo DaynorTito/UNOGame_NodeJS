@@ -2,7 +2,8 @@ import { createScoreService,
     getScoresService, 
     getScoreByIdService, 
     updateScoreService, 
-    deleteScoreService} from "../services/scoreService"
+    deleteScoreService
+} from "../services/scoreService";
 
 const createScore = async (req, res, next) => {
     try {

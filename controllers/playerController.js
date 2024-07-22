@@ -1,8 +1,10 @@
-import { createPlayerService, 
+import { 
+    createPlayerService, 
     getPlayersService, 
     getPlayerByIdService, 
     updatePlayerService, 
-    deletePlayerService} from "../services/playerService"
+    deletePlayerService
+} from "../services/playerService";
 
 const createPlayer = async (req, res, next) => {
     try {
