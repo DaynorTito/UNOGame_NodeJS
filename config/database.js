@@ -14,13 +14,14 @@ const sequelize = new Sequelize(
 );
   
 
-(async () => {
-    try {
-      await sequelize.authenticate();
-      console.log('Connection established successfully');
-    } catch (error) {
-      console.error('Unable to connect to the Database:', error);
-    }
-  })();
+export async function initDatabase() {
+  try {
+    await sequelize.sync();
+    console.log('Tables have been created');
+  } catch (error) {
+    console.error('Unable to create tables:', error);
+    throw error;
+  }
+}
 
 export default sequelize;
