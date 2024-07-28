@@ -2,13 +2,13 @@ import { DataTypes, Model, UUIDV4} from "sequelize";
 import sequelize from "../config/database.js";
 import bcrypt from 'bcrypt';
 
-class User extends Model {
+class UserPlayer extends Model {
   async comparePassword(givenPassword) {
     return await bcrypt.compare(givenPassword, this.password);
   }
 }
 
-User.init({
+UserPlayer.init({
   id: {
     type: DataTypes.STRING,
     defaultValue: UUIDV4,
@@ -26,13 +26,17 @@ User.init({
       isEmail: true
     }
   },
+  age: {
+    type: DataTypes.INTEGER,
+    allowNull: true
+  },
   password: {
     type: DataTypes.STRING,
     allowNull: false
   }
 }, {
   sequelize,
-  modelName: 'User',
+  modelName: 'UserPlayer',
   hooks: {
     beforeCreate: async (user) => {
       if (user.password) {
@@ -48,4 +52,4 @@ User.init({
   }
 });
 
-export default User;
+export default UserPlayer;

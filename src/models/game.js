@@ -1,11 +1,12 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, UUIDV4 } from "sequelize";
 import sequelize from "../config/database.js";
+import UserPlayer from "./userPlayer.js";
 
 const Game = sequelize.define('Game', {
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true,
-        autoIncrement: true
+        defaultValue: UUIDV4,
     },
     title: {
         type: DataTypes.STRING,
@@ -13,11 +14,24 @@ const Game = sequelize.define('Game', {
     },
     status: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue: 'active'
     },
     maxPlayers: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    rules: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    userCreatedId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        references: {
+            model: UserPlayer,
+            key: 'id'
+        }
     }
 }, {
     timestamps: true

@@ -1,6 +1,7 @@
 import Game from "../models/game.js";
 
-const createGameService = async (GameData) => {
+const createGameService = async (GameData, user) => {
+    GameData.userCreatedId = user.id;
     return await Game.create(GameData);
 };
 

@@ -1,20 +1,22 @@
-import { DataTypes, UUIDV4 } from "sequelize";
+import { DataTypes, UUIDV4} from "sequelize";
 import sequelize from "../config/database.js";
+import UserPlayer from "./userPlayer.js";
 import Game from "./game.js";
 
-const Card = sequelize.define('Card', {
+
+const Attendee = sequelize.define('Attendee', {
     id: {
         type: DataTypes.STRING,
         primaryKey: true,
         defaultValue: UUIDV4
     },
-    color: {
+    userId: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    value: {
-        type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: UserPlayer,
+            key: 'id'
+        }
     },
     gameId: {
         type: DataTypes.STRING,
@@ -23,10 +25,14 @@ const Card = sequelize.define('Card', {
             model: Game,
             key: 'id'
         }
+    },
+    status: {
+        type: DataTypes.STRING,
+        defaultValue: 'on hold'
     }
 
 }, {
     timestamps: true
 });
 
-export default Card;
+export default Attendee;

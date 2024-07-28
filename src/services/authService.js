@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken";
-import { getUserByUsernameService } from "./userService.js";
+import { getUserPlayerByname } from "./userPlayerService.js";
 
 
 
 const login =  async (username, password) => {
-    const user = await getUserByUsernameService(username);
+    const user = await getUserPlayerByname(username);
     
     if(!user) {
         throw new Error('Inavid credentials');
@@ -13,20 +13,24 @@ const login =  async (username, password) => {
     if(!isPasswordValid) {
         throw new Error('Inavid password');
     }
-    const token = jwt.sign({username, email: user.email}, process.env.SECRET);
+    const token = jwt.sign({id: user.id, username, email: user.email}, process.env.SECRET);
 
     return token;
 };
 
-const logout = () => {
-    // Invaidate token in client
+const logout = (token) => {
+    if (!verifyToken(token))
+        return { message: 'Invalid token' };
     return { message: 'User logged out successfully' };
 };
 
 const validateToken = (bearerToken) => {
     const token = bearerToken.split(" ").at(1);
-    const decodedToken = jwt.verify(token, process.env.SECRET);
-    return decodedToken;
+    return verifyToken(token);
+}
+ 
+const verifyToken = (token) => {
+    return jwt.verify(token, process.env.SECRET);;
 }
 
 export {login, validateToken, logout};

@@ -6,10 +6,11 @@ import {
     updateGame,
     deleteGame
 } from "../controllers/gameController.js";
+import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.post('/games', createGame);
+router.post('/games', authMiddleware, createGame);
 router.get('/games', getGames);
 router.get('/games/:id', getGameById);
 router.put('/games/:id', updateGame);

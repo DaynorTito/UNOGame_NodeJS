@@ -1,24 +1,24 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, UUIDV4 } from "sequelize";
 import sequelize from "../config/database.js";
-import Player from "./player.js";
 import Game from "./game.js";
+import UserPlayer from "./userPlayer.js";
 
 const Score = sequelize.define('Score', {
     id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true,
-        autoIncrement: true
+        defaultValue: UUIDV4
     },
     playerId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         references: {
-            model: Player,
+            model: UserPlayer,
             key: 'id'
         }
     },
     gameId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
         references: {
             model: Game,

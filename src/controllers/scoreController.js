@@ -25,9 +25,8 @@ const getScores =  async (req, res, next) => {
 
 const getScoreById = async (req, res, next) => {
     const { id } = req.params;
-    const numericId = parseInt(id, 10);
     try {
-        const score = await getScoreByIdService(numericId);
+        const score = await getScoreByIdService(id);
         if (!score) {
             return res.status(404).json({ message: 'Score not found' });
         }
@@ -39,9 +38,8 @@ const getScoreById = async (req, res, next) => {
 
 const updateScore = async (req, res, next) => {
     const { id } = req.params;
-    const numericId = parseInt(id, 10);
     try {
-        const score = await updateScoreService(numericId, req.body);
+        const score = await updateScoreService(id, req.body);
         res.status(200).json(score);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -50,9 +48,8 @@ const updateScore = async (req, res, next) => {
 
 const deleteScore = async (req, res, next) => {
     const { id } = req.params;
-    const numericId = parseInt(id, 10);
     try {
-        await deleteScoreService(numericId);
+        await deleteScoreService(id);
         res.status(204).send();
     } catch (error) {
         res.status(500).json({ message: error.message });

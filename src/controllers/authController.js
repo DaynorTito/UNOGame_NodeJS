@@ -10,9 +10,18 @@ const loginUser = async(req, res, next) => {
     }
 };
 
-const logoutUser = (req, res, next) => {
-    const response = logoutUser();
-    res.json(response);
-};
+const logoutUser = async (req, res, next) => {
+    const { access_token } = req.body;
+    
+    if (!access_token)
+      return res.status(400).json({ error: 'Access token is required' });
+  
+    try {
+      const response = await logout(access_token);
+      res.json(response);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+  };
 
 export {loginUser, logoutUser}
