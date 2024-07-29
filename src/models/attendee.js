@@ -12,7 +12,6 @@ const Attendee = sequelize.define('Attendee', {
     },
     userId: {
         type: DataTypes.STRING,
-        allowNull: false,
         references: {
             model: UserPlayer,
             key: 'id'
@@ -29,10 +28,13 @@ const Attendee = sequelize.define('Attendee', {
     status: {
         type: DataTypes.STRING,
         defaultValue: 'on hold'
+    },
+    turn: {
+        type: DataTypes.INTEGER,
+        allowNull: true
     }
 
 }, {
     timestamps: true
 });
-
 export default Attendee;

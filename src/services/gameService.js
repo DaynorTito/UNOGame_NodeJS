@@ -1,4 +1,10 @@
+import { ValidationError, UnauthorizedError } from "../errors/customError.js";
+import { GameStatus } from "../utils/gameStatus.js";
+import Attendee from "../models/attendee.js";
 import Game from "../models/game.js";
+import { getNroPlayersJoined, getPlayersGame, getUserNextTurn } from "./attendeeService.js";
+import UserPlayer from "../models/userPlayer.js";
+import { UserStatus } from "../utils/userStatus.js";
 
 const createGameService = async (GameData, user) => {
     GameData.userCreatedId = user.id;
@@ -10,7 +16,10 @@ const getGamesService = async () => {
 };
 
 const getGameByIdService = async (id) => {
-    return await Game.findByPk(id);
+    const game = Game.findByPk(id);
+    if (!game)
+        throw new ValidationError('Game does not exist');
+    return game;
 };
 
 const updateGameService = async (id, updateData) => {
@@ -22,6 +31,23 @@ const updateGameService = async (id, updateData) => {
     throw new Error('Game not found');
 };
 
+const startGameService = async (id, updateData, userId) => {
+    const game = await getGameByIdService(id);
+    if (game.userCreatedId != userId)
+        throw new UnauthorizedError('You cannot start the game');
+    if (game.status === GameStatus.IN_PROGRESS)
+        throw new ValidationError('Game has already stared');
+
+    const attendees = await Attendee.findAll({where: {gameId: id, status: UserStatus.READY}});
+    const totalAttendees = await Attendee.count({where: { gameId: id}});
+    if (attendees.length !== totalAttendees)
+        throw new ValidationError('Not all attendees are ready');
+    updateData.status = GameStatus.IN_PROGRESS;
+    await game.update(updateData);
+    return game;
+};
+
+
 const deleteGameService = async(id) => {
     const game = await Game.findByPk(id);
     if (game) {
@@ -31,9 +57,45 @@ const deleteGameService = async(id) => {
     throw new Error('Game not found');
 };
 
+const endGameService = async(idGame, updateData, idUser) => {
+    const game = await getGameByIdService(idGame);
+    if (game.status != GameStatus.IN_PROGRESS)
+        throw new ValidationError('Game is not in progress');
+    if (game.userCreatedId != idUser)
+        throw new UnauthorizedError('Only the creator can finish the game');
+    updateData.status = GameStatus.FINISHED;
+    await game.update(updateData);
+    return game;
+};
+
+const getPlayersService = async(idGame) => {
+    const game = await getGameByIdService(idGame);
+    const attendees = await getPlayersGame(idGame);
+    const players = await UserPlayer.findAll({where: {id: attendees}, attributes: ['username']});
+    return players;
+};
+
+const getNextTurnService = async(idGame) => {
+    const game = await getGameByIdService(idGame);
+    if (game.status != GameStatus.IN_PROGRESS)
+        throw new ValidationError('Game is not in progress');
+    const userCurrent = await getUserNextTurn(game.id, game.currentTurn);
+    const nroPlayers = await getNroPlayersJoined(game.id);
+    if (game.currentTurn < nroPlayers)
+        game.currentTurn += 1;
+    else
+        game.currentTurn = 1;
+    await updateGameService(game.id, {currentTurn: game.currentTurn});
+    return userCurrent;
+};
+
 export {createGameService, 
         getGamesService,
         getGameByIdService,
         updateGameService,
-        deleteGameService
+        deleteGameService,
+        startGameService,
+        endGameService,
+        getPlayersService,
+        getNextTurnService
 };

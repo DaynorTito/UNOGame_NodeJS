@@ -3,8 +3,13 @@ import {
     getGamesService, 
     getGameByIdService, 
     updateGameService, 
-    deleteGameService
+    deleteGameService,
+    startGameService,
+    endGameService,
+    getPlayersService,
+    getNextTurnService
 } from "../services/gameService.js";
+import { getUserPlayerByIdService } from "../services/userPlayerService.js";
 
 const createGame = async (req, res, next) => {
     try {
@@ -57,4 +62,59 @@ const deleteGame = async (req, res, next) => {
     }
 };
 
-export {createGame, getGames, getGameById, updateGame, deleteGame};
+const startGame = async (req, res, next) => {
+    const { gameId } = req.body;
+    const user = req.user;
+    try {
+        const game = await startGameService(gameId, req.body, user.id)
+        res.status(200).json({message: 'Game started successfully'});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const finishGame = async (req, res, next) => {
+    const { gameId } = req.body;
+    const user = req.user;
+    try {
+        const game = await endGameService(gameId, req.body, user.id)
+        res.status(200).json({message: 'Game ended successfully'});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const getStatusGame = async (req, res, next) => {
+    const { gameId } = req.body;
+    try {
+        const game = await getGameByIdService(gameId);
+        if (!game)
+            return res.status(404).json({ message: 'Game not found' });
+        res.status(200).json({gameId, state: game.status});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const getPlayersGame = async (req, res, next) => {
+    const { gameId } = req.body;
+    try {
+        const players = await getPlayersService(gameId);
+        res.status(200).json({gameId, players});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+const getNextPlayer = async (req, res, next) => {
+    const { gameId } = req.body;
+    try {
+        const idNextPlayer = await getNextTurnService(gameId);
+        const player = await getUserPlayerByIdService(idNextPlayer);
+        res.status(200).json({gameId, username: player.username});
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+export {createGame, getGames, getGameById, updateGame, deleteGame, startGame, finishGame, getStatusGame, getPlayersGame, getNextPlayer};

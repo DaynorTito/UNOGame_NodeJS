@@ -16,6 +16,10 @@ const Card = sequelize.define('Card', {
         type: DataTypes.STRING,
         allowNull: false
     },
+    point: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     gameId: {
         type: DataTypes.STRING,
         allowNull: false,

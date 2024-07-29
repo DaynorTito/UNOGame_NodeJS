@@ -25,6 +25,10 @@ const Game = sequelize.define('Game', {
         type: DataTypes.STRING,
         allowNull: true
     },
+    currentTurn: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1
+    },
     userCreatedId: {
         type: DataTypes.STRING,
         allowNull: true,
