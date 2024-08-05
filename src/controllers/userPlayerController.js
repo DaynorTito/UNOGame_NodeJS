@@ -54,7 +54,6 @@ const getBasicDetails = async (req, res, next) => {
     try {
         const user = req.user;
         const {username, email} = await getUserPlayerByIdService(user.id);
-        console.log(username)
         res.status(200).json({username, email});
     } catch (error) {
         res.status(500).json({ message: error.message });

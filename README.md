@@ -141,7 +141,7 @@ This project uses authentication based on JWT (JSON Web Tokens) to protect certa
 ### Authentication Process
 
 1. **Login**
-   - Endpoint: `POST /auth/login
+   - Endpoint: `POST /api/v1//login
    - Description: allows users to log in and obtain a JWT token.
    - Request body:
      ```json
@@ -239,9 +239,77 @@ To access protected endpoints, be sure to include the JWT token in the request h
 ![alt text](/docs/images/image-4.png)
 
 ![alt text](/docs/images/image-5.png)
+
    ![alt text](/docs/images/image-2.png)
 
    ![alt text](/docs/images/image-6.png)
 
    ![alt text](/docs/images/image-1.png)
 
+
+## Testing and Code Coverage
+In this project, several unit and integration tests have been implemented and executed using Jest. The following is a description of what Jest is, what mocks are, how they were used in the project tests, the type of tests performed, the objective of each test and a summary of the results obtained. 
+
+### What is Jest?
+Jest is a JavaScript testing framework. It is used in Node.js applications for its ease of use, speed and advanced features such as code coverage reporting, the ability to perform asynchronous testing and support for mocks and spies.
+
+
+### What are Mocks?
+Mocks are simulated objects that mimic the behavior of real objects. They were used in the project in unit and integration testing to isolate the code being tested, allowing testing to focus on the specific functionality of the unit code without relying on external components such as databases, external services, or any other dependencies.
+
+In this project, mocks were used to simulate dependencies on controllers and services, ensuring that the tests were deterministic and did not depend on external components.
+
+### Execution of the Tests
+To run the tests, the following command was used:
+
+```bash
+   npm run test
+```
+The above command runs Jest with the option to generate a code coverage report.
+
+The test report generated can be found in the folder:
+```bash
+   /coverage
+```
+### Test Results
+All tests were executed correctly, with a total of 124 tests passing successfully.
+
+- **Test Suites:** 13 passed, 13 in total
+
+- **Tests:** 124 passed, 124 in total
+
+- **Snapshots:** 0 in total
+
+- **Execution time:** 3,956 seconds
+
+- **Total coverage:** 87.86 %
+
+
+![alt text](/docs/images/reportCovCons.png)
+
+### Types of Tests Performed
+#### Unit Tests
+Unit tests focus on validating the functionality of individual code components, such as functions and methods. In this project, unit tests were performed for drivers, services and error handling.
+
+A __test__ folder was created inside each project folder.
+
+- Objective: To ensure that each unit of code works - correctly in isolation.
+- Methods: Mocks were used to simulate external dependencies and ensure that the tests are deterministic. 
+
+## Code Coverage
+Code coverage is an indicator of the amount of source code being executed by the tests. The following is a summary of code coverage:
+
+### Total Coverage:
+Statements: 87.86%.
+
+Branches: 89.53%
+
+Functions: 94.31% 
+
+Lines: 87.83% 
+
+The project has an overall code coverage of 87.86%, which is a good indicator of the quality and scope of the testing performed. The tests have covered all major areas of the code, ensuring that critical components work as expected.
+
+## Coverage report 
+
+![alt text](/docs/images/reportCoverageHtml.png)

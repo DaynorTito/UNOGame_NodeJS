@@ -16,7 +16,7 @@ const getGamesService = async () => {
 };
 
 const getGameByIdService = async (id) => {
-    const game = Game.findByPk(id);
+    const game = await Game.findByPk(id);
     if (!game)
         throw new ValidationError('Game does not exist');
     return game;

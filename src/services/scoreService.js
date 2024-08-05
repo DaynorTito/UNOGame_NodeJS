@@ -13,7 +13,7 @@ const getScoreByIdService = async (id) => {
 };
 
 const updateScoreService = async (id, updateData) => {
-    const score = await score.findByPk(id);
+    const score = await Score.findByPk(id);
     if (score) {
         await score.update(updateData);
         return score;
