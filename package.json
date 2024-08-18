@@ -5,7 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js"
   },
   "author": "Daynor Tito",
   "license": "ISC",
@@ -15,6 +17,7 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "mysql2": "^3.10.3",
+    "pnpm": "^9.7.0",
     "redis": "^4.6.15",
     "sequelize": "^6.37.3"
   },

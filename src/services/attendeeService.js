@@ -3,8 +3,6 @@ import { AlreadyExistsError, NotFoundError, ValidationError } from "../errors/cu
 import { getGameByIdService } from "./gameService.js";
 import { UserStatus } from "../utils/userStatus.js"
 import Game from "../models/game.js";
-import UserPlayer from "../models/userPlayer.js";
-import sequelize from "../config/database.js";
 
 const createAttendeeService = async (attendeeData, user) => {
     const game = await getGameByIdService(attendeeData.gameId);

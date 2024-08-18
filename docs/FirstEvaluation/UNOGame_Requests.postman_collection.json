@@ -1,0 +1,1094 @@
+{
+	"info": {
+		"_postman_id": "dee446f3-179c-4a9f-8ba9-cc82523e1111",
+		"name": "UNOGame_Requests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30520122"
+	},
+	"item": [
+		{
+			"name": "UserLogin",
+			"item": [
+				{
+					"name": "/users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Daniel\",\n    \"age\": 22,\n    \"password\": \"daniel123\",\n    \"userName\": \"dani555\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Daynor\",\n    \"age\": 22,\n    \"password\": \"daynor123\",\n    \"userName\": \"daynor123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"daynor2123\",\n    \"email\": \"daynor2@gmail.com\",\n    \"age\": 21,\n    \"password\": \"daynor123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"daynor123\",\n    \"password\": \"daynor123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "yJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg5ODI3NWE2LWEzOWItNDA2My1hNzViLTRhYmZmY2YxZTNmYyIsInVzZXJuYW1lIjoianVhbiIsImVtYWlsIjoianVhbkBnbWFpbC5jb20iLCJpYXQiOjE3MjIxNDQ3NzF9.VkAv5D6X6bY7aWCRqKSGKwZDPsKrlm9pP_CSATb9Tzo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg5ODI3NWE2LWEzOWItNDA2My1hNzViLTRhYmZmY2YxZTNmYyIsInVzZXJuYW1lIjoianVhbiIsImVtYWlsIjoianVhbkBnbWFpbC5jb20iLCJpYXQiOjE3MjIxNDQ3NzF9.VkAv5D6X6bY7aWCRqKSGKwZDPsKrlm9pP_CSATb9Tzo\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/infuser     information user",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdiYTg2M2JkLTA1MWItNDVmOS04Y2NlLTM4OGQxNjgyNGYxOCIsInVzZXJuYW1lIjoiZGF5bm9yMTIzIiwiZW1haWwiOiJkYXlub3JAZ21haWwuY29tIiwiaWF0IjoxNzIzNDMzNjIyfQ.DEu0xtb44Wf875oY1ElmThE4nouRTtFa85ytrmOGtvY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/infuser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"infuser"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "A user can register and then I can login by receiving an access token, likewise all registered users can be listed."
+		},
+		{
+			"name": "Create Game",
+			"item": [
+				{
+					"name": "/register  first",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"john123\",\n    \"email\": \"john@gmail.com\",\n    \"age\": 21,\n    \"password\": \"john123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/register second",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"juan123\",\n    \"email\": \"juan123@gmail.com\",\n    \"age\": 21,\n    \"password\": \"juan123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/games",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdiYTg2M2JkLTA1MWItNDVmOS04Y2NlLTM4OGQxNjgyNGYxOCIsInVzZXJuYW1lIjoiZGF5bm9yMTIzIiwiZW1haWwiOiJkYXlub3JAZ21haWwuY29tIiwiaWF0IjoxNzIzNDMwMDc5fQ.T7ywgxVCuXcR1KMwiRoXuTQUHEV06cvBdnLAfYAdb_s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"UNO num 1\",\n    \"maxPlayers\": 3,\n    \"rules\": \"you cannor change cards\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/games",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"games"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/players",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/games",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdiYTg2M2JkLTA1MWItNDVmOS04Y2NlLTM4OGQxNjgyNGYxOCIsInVzZXJuYW1lIjoiZGF5bm9yMTIzIiwiZW1haWwiOiJkYXlub3JAZ21haWwuY29tIiwiaWF0IjoxNzIzNDMwMDc5fQ.T7ywgxVCuXcR1KMwiRoXuTQUHEV06cvBdnLAfYAdb_s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"name\": \"Daynor Tito\",\n        \"age\": 21,\n        \"email\": \"daynor.tito@jala.university\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/games",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"games"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AddAttendee",
+			"item": [
+				{
+					"name": "/api/v1/login 1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"john123\",\n    \"password\": \"john123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/login 2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"juan123\",\n    \"password\": \"juan123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/v1/login 3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"daynor123\",\n    \"password\": \"daynor123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/attendee    1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFjZWFkNDU3LTM4OTktNDJlNy05MGU5LTYzYmMxZWQyNjBjZSIsInVzZXJuYW1lIjoiam9objEyMyIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJpYXQiOjE3MjM0MzI5NTZ9.tVc8zVNPB_ZWehr2Tw-C_RISuFDS_gS4JGU0zBYdZoI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"gameId\": \"49f50bf7-4204-40bf-984f-ececd9324c33\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/attendees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"attendees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/attendee     2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzOTdlMDlmLTNlMTItNDYzZi1hMzcyLWI2ZGZiNTg1YmI2ZCIsInVzZXJuYW1lIjoianVhbjEyMyIsImVtYWlsIjoianVhbkBnbWFpbC5jb20iLCJpYXQiOjE3MjM0MzI5Nzl9.RupEdCLDVdxI4EoMJnZJXIto6smFl7ElATGr0tk3yzc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"gameId\": \"49f50bf7-4204-40bf-984f-ececd9324c33\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/attendees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"attendees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/attendee 3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdiYTg2M2JkLTA1MWItNDVmOS04Y2NlLTM4OGQxNjgyNGYxOCIsInVzZXJuYW1lIjoiZGF5bm9yMTIzIiwiZW1haWwiOiJkYXlub3JAZ21haWwuY29tIiwiaWF0IjoxNzIzNDMyOTk4fQ._1i0BE2a9UGCEJLLv2rTs8vfD-mZ5pn0ZiaxprwA6n8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"gameId\": \"49f50bf7-4204-40bf-984f-ececd9324c33\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/attendees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"attendees"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MarkReady",
+			"item": [
+				{
+					"name": "/attendeeReady 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdiYTg2M2JkLTA1MWItNDVmOS04Y2NlLTM4OGQxNjgyNGYxOCIsInVzZXJuYW1lIjoiZGF5bm9yMTIzIiwiZW1haWwiOiJkYXlub3JAZ21haWwuY29tIiwiaWF0IjoxNzIzNDM0Mjg2fQ.2HEe19tP11bEpXzq7Q66b_wanBrZoD9yuuwQQ90FHSE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"gameId\": \"49f50bf7-4204-40bf-984f-ececd9324c33\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/attendeeReady",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"attendeeReady"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/attendeeReady 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjQzOTdlMDlmLTNlMTItNDYzZi1hMzcyLWI2ZGZiNTg1YmI2ZCIsInVzZXJuYW1lIjoianVhbjEyMyIsImVtYWlsIjoianVhbkBnbWFpbC5jb20iLCJpYXQiOjE3MjM0MzQzMzF9.veLN9-Pky_5ya_SepGHurrW5csWlWJwel3OO-4yYPZc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"gameId\": \"49f50bf7-4204-40bf-984f-ececd9324c33\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/attendeeReady",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"attendeeReady"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/attendeeReady 3",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFjZWFkNDU3LTM4OTktNDJlNy05MGU5LTYzYmMxZWQyNjBjZSIsInVzZXJuYW1lIjoiam9objEyMyIsImVtYWlsIjoiam9obkBnbWFpbC5jb20iLCJpYXQiOjE3MjM0MzQyMjd9.fnAZRFxSHumATiQWuTIytxrkBjvMUJKLEU1sYX794pc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"gameId\": \"49f50bf7-4204-40bf-984f-ececd9324c33\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/attendeeReady",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"attendeeReady"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/startGame",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdiYTg2M2JkLTA1MWItNDVmOS04Y2NlLTM4OGQxNjgyNGYxOCIsInVzZXJuYW1lIjoiZGF5bm9yMTIzIiwiZW1haWwiOiJkYXlub3JAZ21haWwuY29tIiwiaWF0IjoxNzIzNDM0Mjg2fQ.2HEe19tP11bEpXzq7Q66b_wanBrZoD9yuuwQQ90FHSE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"gameId\": \"49f50bf7-4204-40bf-984f-ececd9324c33\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/startGame",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"startGame"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cards",
+			"item": [
+				{
+					"name": "/discards",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"name\": \"Daynor Tito\",\n        \"age\": 21,\n        \"email\": \"daynor.tito@jala.university\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/discards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"discards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/cards",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n        \"name\": \"Daynor Tito\",\n        \"age\": 21,\n        \"email\": \"daynor.tito@jala.university\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/cards",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"cards"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "/leave",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM0OGI4ZTc0LTM5OWYtNGY1Mi1hZDMxLTkxZWYwOGJhOGQzYyIsInVzZXJuYW1lIjoianVhbiIsImVtYWlsIjoianVhbkBnbWFpbC5jb20iLCJpYXQiOjE3MjIxODYzNTh9.3MoMd4RNVK-ok69SpolZsR5uJO5ku16Ow3R7YJjyKR4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"gameId\": \"49f50bf7-4204-40bf-984f-ececd9324c33\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/leave",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"leave"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/finishGame",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdiYTg2M2JkLTA1MWItNDVmOS04Y2NlLTM4OGQxNjgyNGYxOCIsInVzZXJuYW1lIjoiZGF5bm9yMTIzIiwiZW1haWwiOiJkYXlub3JAZ21haWwuY29tIiwiaWF0IjoxNzIzNDM0Mzg0fQ.-_Egv2SOtFKza2PTIqqu7zPzAtj6dHmtE6ghmdisk2Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"gameId\": \"49f50bf7-4204-40bf-984f-ececd9324c33\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/finishGame",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"finishGame"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/statusGame",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM0OGI4ZTc0LTM5OWYtNGY1Mi1hZDMxLTkxZWYwOGJhOGQzYyIsInVzZXJuYW1lIjoianVhbiIsImVtYWlsIjoianVhbkBnbWFpbC5jb20iLCJpYXQiOjE3MjIxODYzNTh9.3MoMd4RNVK-ok69SpolZsR5uJO5ku16Ow3R7YJjyKR4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"gameId\": \"49f50bf7-4204-40bf-984f-ececd9324c33\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/statusGame",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"statusGame"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/playersGame",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM0OGI4ZTc0LTM5OWYtNGY1Mi1hZDMxLTkxZWYwOGJhOGQzYyIsInVzZXJuYW1lIjoianVhbiIsImVtYWlsIjoianVhbkBnbWFpbC5jb20iLCJpYXQiOjE3MjIxODYzNTh9.3MoMd4RNVK-ok69SpolZsR5uJO5ku16Ow3R7YJjyKR4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"gameId\": \"49f50bf7-4204-40bf-984f-ececd9324c33\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/playersGame",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"playersGame"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/nextPlayer",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM0OGI4ZTc0LTM5OWYtNGY1Mi1hZDMxLTkxZWYwOGJhOGQzYyIsInVzZXJuYW1lIjoianVhbiIsImVtYWlsIjoianVhbkBnbWFpbC5jb20iLCJpYXQiOjE3MjIxODYzNTh9.3MoMd4RNVK-ok69SpolZsR5uJO5ku16Ow3R7YJjyKR4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"gameId\": \"49f50bf7-4204-40bf-984f-ececd9324c33\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/nextPlayer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"nextPlayer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "attendees",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n        \"name\": \"Daynor Tito\",\n        \"age\": 21,\n        \"email\": \"daynor.tito@jala.university\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/attendees",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"attendees"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

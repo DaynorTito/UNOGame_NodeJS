@@ -1,6 +1,5 @@
 import { DataTypes, UUIDV4 } from "sequelize";
 import sequelize from "../config/database.js";
-import Game from "./game.js";
 
 const Card = sequelize.define('Card', {
     id: {
@@ -19,14 +18,6 @@ const Card = sequelize.define('Card', {
     point: {
         type: DataTypes.INTEGER,
         allowNull: false
-    },
-    gameId: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        references: {
-            model: Game,
-            key: 'id'
-        }
     }
 
 }, {
