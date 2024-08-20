@@ -2,7 +2,7 @@ import { ValidationError, UnauthorizedError } from "../errors/customError.js";
 import { GameStatus } from "../utils/gameStatus.js";
 import Attendee from "../models/attendee.js";
 import Game from "../models/game.js";
-import { getNroPlayersJoined, getPlayersGame, getUserNextTurn } from "./attendeeService.js";
+import attendeeService from "./attendeeService.js";
 import UserPlayer from "../models/userPlayer.js";
 import { UserStatus } from "../utils/userStatus.js";
 
@@ -70,7 +70,7 @@ const endGameService = async(idGame, updateData, idUser) => {
 
 const getPlayersService = async(idGame) => {
     const game = await getGameByIdService(idGame);
-    const attendees = await getPlayersGame(idGame);
+    const attendees = await attendeeService.getPlayersGame(idGame);
     const players = await UserPlayer.findAll({where: {id: attendees}, attributes: ['username']});
     return players;
 };
@@ -79,8 +79,8 @@ const getNextTurnService = async(idGame) => {
     const game = await getGameByIdService(idGame);
     if (game.status != GameStatus.IN_PROGRESS)
         throw new ValidationError('Game is not in progress');
-    const userCurrent = await getUserNextTurn(game.id, game.currentTurn);
-    const nroPlayers = await getNroPlayersJoined(game.id);
+    const userCurrent = await attendeeService.getUserNextTurn(game.id, game.currentTurn);
+    const nroPlayers = await attendeeService.getNroPlayersJoined(game.id);
     if (game.currentTurn < nroPlayers)
         game.currentTurn += 1;
     else
@@ -89,13 +89,14 @@ const getNextTurnService = async(idGame) => {
     return userCurrent;
 };
 
-export {createGameService, 
-        getGamesService,
-        getGameByIdService,
-        updateGameService,
-        deleteGameService,
-        startGameService,
-        endGameService,
-        getPlayersService,
-        getNextTurnService
+export default {
+    createGameService, 
+    getGamesService,
+    getGameByIdService,
+    updateGameService,
+    deleteGameService,
+    startGameService,
+    endGameService,
+    getPlayersService,
+    getNextTurnService
 };

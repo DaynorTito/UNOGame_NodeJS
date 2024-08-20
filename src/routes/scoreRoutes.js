@@ -1,19 +1,13 @@
 import { Router } from "express";
-import {
-    createScore,
-    getScores,
-    getScoreById,
-    updateScore,
-    deleteScore
-} from "../controllers/scoreController.js";
+import scoreController from "../controllers/scoreController.js";
 
 const router = Router();
 
-router.post('/scores', createScore);
-router.get('/scores', getScores);
-router.get('/scores/:id', getScoreById);
-router.put('/scores/:id', updateScore);
-router.delete('/scores/:id', deleteScore);
+router.post('/scores', scoreController.createScore);
+router.get('/scores', scoreController.getScores);
+router.get('/scores/:id', scoreController.getScoreById);
+router.put('/scores/:id', scoreController.updateScore);
+router.delete('/scores/:id', scoreController.deleteScore);
 
 
 export default router;

@@ -30,9 +30,10 @@ const deleteScoreService = async(id) => {
     throw new Error('Score not found');
 };
 
-export {createScoreService, 
-        getScoresService,
-        getScoreByIdService,
-        updateScoreService,
-        deleteScoreService
+export default {
+    createScoreService, 
+    getScoresService,
+    getScoreByIdService,
+    updateScoreService,
+    deleteScoreService
 };

@@ -37,4 +37,5 @@ const Attendee = sequelize.define('Attendee', {
 }, {
     timestamps: true
 });
+
 export default Attendee;

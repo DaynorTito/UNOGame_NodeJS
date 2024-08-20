@@ -1,13 +1,14 @@
 import { Router } from 'express';
-import { registerUserPlayer, getUserPlayers, getUserPlayerById, updateUserPlayer, deleteUserPlayer, getBasicDetails} from '../controllers/userPlayerController.js';
+import userPlayerController from '../controllers/userPlayerController.js';
 import { authMiddleware } from '../middlewares/authMiddleware.js';
 
 const router = Router();
 
-router.post('/register', registerUserPlayer);
-router.get('/users', getUserPlayers);
-router.get('/users/:id', getUserPlayerById);
-router.put('/users/:id', updateUserPlayer);
-router.delete('/users/:id', deleteUserPlayer);
-router.get('/infuser', authMiddleware,getBasicDetails);
+router.post('/register', userPlayerController.registerUserPlayer);
+router.get('/users', userPlayerController.getUserPlayers);
+router.get('/users/:id', userPlayerController.getUserPlayerById);
+router.put('/users/:id', userPlayerController.updateUserPlayer);
+router.delete('/users/:id', userPlayerController.deleteUserPlayer);
+router.get('/infuser', authMiddleware,userPlayerController.getBasicDetails);
+
 export default router;

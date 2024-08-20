@@ -1,18 +1,22 @@
 import dotenv from 'dotenv';
 import { Sequelize } from 'sequelize';
 
-dotenv.config();
+dotenv.config();  
 
 const sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    {
-      host: process.env.DB_HOST,
-      dialect: process.env.DB_DIALECT,
-    }
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIALECT,
+  }
 );
-  
+// export async function initDatabase() {
+//   const databaseConf = new ConfigureMysqlDb();
+//   await databaseConf.connect();
+//   return databaseConf.initializeRepositories();
+// }
 
 export async function initDatabase() {
   try {
@@ -23,5 +27,4 @@ export async function initDatabase() {
     throw error;
   }
 }
-
 export default sequelize;

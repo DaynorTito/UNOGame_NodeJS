@@ -30,7 +30,8 @@ const deleteCardService = async(id) => {
     throw new Error('Card not found');
 };
 
-export {createCardService, 
+export default {
+    createCardService, 
     getCardsService,
     getCardByIdService,
     updateCardService,

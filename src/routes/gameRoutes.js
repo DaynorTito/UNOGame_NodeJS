@@ -1,29 +1,18 @@
 import { Router } from "express";
-import {
-    createGame,
-    getGames,
-    getGameById,
-    updateGame,
-    deleteGame,
-    startGame,
-    finishGame,
-    getStatusGame,
-    getPlayersGame,
-    getNextPlayer
-} from "../controllers/gameController.js";
+import gameController from "../controllers/gameController.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.post('/games', authMiddleware, createGame);
-router.get('/games', getGames);
-router.get('/games/:id', getGameById);
-router.put('/games/:id', updateGame);
-router.delete('/games/:id', deleteGame);
-router.post('/startGame', authMiddleware, startGame);
-router.post('/finishGame', authMiddleware, finishGame);
-router.get('/statusGame', getStatusGame);
-router.get('/playersGame', getPlayersGame);
-router.get('/nextPlayer', getNextPlayer);
+router.post('/games', authMiddleware, gameController.createGame);
+router.get('/games', gameController.getGames);
+router.get('/games/:id', gameController.getGameById);
+router.put('/games/:id', gameController.updateGame);
+router.delete('/games/:id', gameController.deleteGame);
+router.post('/gameController.startGame', authMiddleware, gameController.startGame);
+router.post('/gameController.finishGame', authMiddleware, gameController.finishGame);
+router.get('/statusGame', gameController.getStatusGame);
+router.get('/playersGame', gameController.getPlayersGame);
+router.get('/nextPlayer', gameController.getNextPlayer);
 
 export default router;

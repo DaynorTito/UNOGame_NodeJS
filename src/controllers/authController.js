@@ -1,14 +1,14 @@
-import {login, logout} from '../services/authService.js';
 
 const loginUser = async(req, res, next) => {
-    const {username, password} = req.body;
-    try {
-        const token = await login(username, password);
-        res.status(200).json({access_token: token});
-    } catch (error) {
-        res.status(400).json({ error: error.message });
-    }
+  const {username, password} = req.body;
+  try {
+      const token = await req.authenticationHandler.login(username, password);
+      res.status(200).json({access_token: token});
+  } catch (error) {
+      next(error);
+  }
 };
+
 
 const logoutUser = async (req, res, next) => {
     const { access_token } = req.body;
@@ -17,11 +17,14 @@ const logoutUser = async (req, res, next) => {
       return res.status(400).json({ error: 'Access token is required' });
   
     try {
-      const response = await logout(access_token);
+      const response = await req.authenticationHandler.logout(access_token);
       res.json(response);
     } catch (error) {
-        res.status(400).json({ error: error.message });
+      next(error);
     }
   };
 
-export {loginUser, logoutUser}
+export default {
+  loginUser, 
+  logoutUser
+};

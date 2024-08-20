@@ -1,60 +1,60 @@
-import { 
-    createCardService, 
-    getCardsService, 
-    getCardByIdService, 
-    updateCardService, 
-    deleteCardService
-} from "../services/cardService.js";
+import cardService from "../services/cardService.js";
 
 const createCard = async (req, res, next) => {
     try {
-        const card = await createCardService(req.body);
+        const card = await cardService.createCardService(req.body);
         res.status(201).json(card);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 const getCards =  async (req, res, next) => {
     try {
-        const cards = await getCardsService();
+        const cards = await cardService.getCardsService();
         res.status(200).json(cards);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 const getCardById = async (req, res, next) => {
     const { id } = req.params;
     try {
-        const card = await getCardByIdService(id);
+        const card = await cardService.getCardByIdService(id);
         if (!card) {
             return res.status(404).json({ message: 'Card not found' });
         }
         res.status(200).json(card);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 const updateCard = async (req, res, next) => {
     const { id } = req.params;
     try {
-        const card = await updateCardService(id, req.body);
+        const card = await cardService.updateCardService(id, req.body);
         res.status(200).json(card);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 const deleteCard = async (req, res, next) => {
     const { id } = req.params;
     try {
-        await deleteCardService(id);
+        await cardService.deleteCardService(id);
         res.status(204).send();
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
-export {createCard, getCards, getCardById, updateCard, deleteCard};
+export default {
+    createCard, 
+    getCards, 
+    getCardById, 
+    updateCard, 
+    deleteCard
+};

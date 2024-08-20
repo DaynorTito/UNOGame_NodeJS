@@ -6,7 +6,7 @@ import userPlayerRouter from './routes/userPlayerRoutes.js';
 import authRouter from './routes/authRoutes.js';
 import attendeeRouter from './routes/attendeeRoutes.js';
 import discardRouter from './routes/discardsRoutes.js';
-
+import errorHandler from './middlewares/errorHandler.js';
 
 export function initServer(port) {
     const app = express();
@@ -19,7 +19,7 @@ export function initServer(port) {
     app.use('/api/v1',authRouter);
     app.use('/api/v1',attendeeRouter);
     app.use('/api/v1',discardRouter);
-
+    app.use(errorHandler);
     app.listen(port, ()=> {
         console.log(`Server listenig on port ${port}`);
     });

@@ -1,6 +1,6 @@
 import Attendee from "../models/attendee.js";
 import { AlreadyExistsError, NotFoundError, ValidationError } from "../errors/customError.js";
-import { getGameByIdService } from "./gameService.js";
+import getGameByIdService from "./gameService.js";
 import { UserStatus } from "../utils/userStatus.js"
 import Game from "../models/game.js";
 
@@ -85,7 +85,8 @@ const getUserNextTurn =  async(idGame, turn) => {
     return attendee.userId;
 };
 
-export {createAttendeeService, 
+export default {
+    createAttendeeService, 
     getAttendeesService,
     getAttendeeByIdService,
     updateAttendeeService,

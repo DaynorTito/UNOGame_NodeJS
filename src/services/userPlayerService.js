@@ -40,11 +40,11 @@ const getUserPlayerByname = async (username) => {
 };
 
 
-
-export {registerUserPlayerService, 
-        getUserPlayersService,
-        getUserPlayerByIdService,
-        updateUserPlayerService,
-        deleteUserPlayerService,
-        getUserPlayerByname
+export default {
+    registerUserPlayerService, 
+    getUserPlayersService,
+    getUserPlayerByIdService,
+    updateUserPlayerService,
+    deleteUserPlayerService,
+    getUserPlayerByname
 };

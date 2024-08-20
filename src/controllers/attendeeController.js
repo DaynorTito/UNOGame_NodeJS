@@ -1,61 +1,53 @@
-import { 
-    createAttendeeService, 
-    getAttendeesService, 
-    getAttendeeByIdService, 
-    updateAttendeeService, 
-    deleteAttendeeService,
-    leaveAttendeeService,
-    markAsReady
-} from "../services/attendeeService.js";
+import attendeeService from "../services/attendeeService.js";
 
 const createAttendee = async (req, res, next) => {
     try {
-        const attendee = await createAttendeeService(req.body, req.user);
+        const attendee = await attendeeService.createAttendeeService(req.body, req.user);
         res.status(201).json({message: 'User joined the game successfully'});
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 const getAttendees =  async (req, res, next) => {
     try {
-        const attendees = await getAttendeesService();
+        const attendees = await attendeeService.getAttendeesService();
         res.status(200).json(attendees);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 const getAttendeeById = async (req, res, next) => {
     const { id } = req.params;
     try {
-        const attendee = await getAttendeeByIdService(id);
+        const attendee = await attendeeService.getAttendeeByIdService(id);
         if (!attendee) {
             return res.status(404).json({ message: 'Attendee not found' });
         }
         res.status(200).json(attendee);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 const updateAttendee = async (req, res, next) => {
     const { id } = req.params;
     try {
-        const attendee = await updateAttendeeService(id, req.body);
+        const attendee = await attendeeService.updateAttendeeService(id, req.body);
         res.status(200).json(attendee);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 const deleteAttendee = async (req, res, next) => {
     const { id } = req.params;
     try {
-        await deleteAttendeeService(id);
+        await attendeeService.deleteAttendeeService(id);
         res.status(204).send();
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
@@ -63,10 +55,10 @@ const leaveAttendeeInProgess = async (req, res, next) => {
     const { gameId } = req.body;
     const user = req.user;
     try {
-        await leaveAttendeeService(gameId, user.id);
+        await attendeeService.leaveAttendeeService(gameId, user.id);
         res.status(200).json({message: 'User left the game successfully'});
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
@@ -74,12 +66,20 @@ const userMarkAsReady = async (req, res, next) => {
     const { gameId } = req.body;
     const user = req.user;
     try {
-        const attendee = await markAsReady(gameId, user.id);
+        const attendee = await attendeeService.markAsReady(gameId, user.id);
         res.status(200).json({message: 'User mark as ready successfully'});
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 
-export {createAttendee, getAttendees, getAttendeeById, updateAttendee, deleteAttendee, leaveAttendeeInProgess, userMarkAsReady};
+export default {
+    createAttendee, 
+    getAttendees, 
+    getAttendeeById, 
+    updateAttendee, 
+    deleteAttendee, 
+    leaveAttendeeInProgess, 
+    userMarkAsReady
+};

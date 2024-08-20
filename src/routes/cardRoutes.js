@@ -1,19 +1,12 @@
 import { Router } from "express";
-import {
-    createCard,
-    getCards,
-    getCardById,
-    updateCard,
-    deleteCard
-} from "../controllers/cardController.js";
+import cardController from "../controllers/cardController.js";
 
 const router = Router();
 
-router.post('/cards', createCard);
-router.get('/cards', getCards);
-router.get('/cards/:id', getCardById);
-router.put('/cards/:id', updateCard);
-router.delete('/cards/:id', deleteCard);
-
+router.post("/cards", cardController.createCard);
+router.get("/cards", cardController.getCards);
+router.get("/cards/:id", cardController.getCardById);
+router.put("/cards/:id", cardController.updateCard);
+router.delete("/cards/:id", cardController.deleteCard);
 
 export default router;

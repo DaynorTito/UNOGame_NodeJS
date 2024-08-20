@@ -40,7 +40,6 @@ UserPlayer.init({
   hooks: {
     beforeCreate: async (user) => {
       if (user.password) {
-        user
         user.password = await bcrypt.hash(user.password, 10);
       }
     },

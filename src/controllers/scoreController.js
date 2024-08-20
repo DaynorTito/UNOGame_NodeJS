@@ -1,59 +1,60 @@
-import { createScoreService, 
-    getScoresService, 
-    getScoreByIdService, 
-    updateScoreService, 
-    deleteScoreService
-} from "../services/scoreService.js";
+import scoreService from "../services/scoreService.js";
 
 const createScore = async (req, res, next) => {
     try {
-        const score = await createScoreService(req.body);
+        const score = await scoreService.createScoreService(req.body);
         res.status(201).json(score);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 const getScores =  async (req, res, next) => {
     try {
-        const scores = await getScoresService();
+        const scores = await scoreService.getScoresService();
         res.status(200).json(scores);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 const getScoreById = async (req, res, next) => {
     const { id } = req.params;
     try {
-        const score = await getScoreByIdService(id);
+        const score = await scoreService.getScoreByIdService(id);
         if (!score) {
             return res.status(404).json({ message: 'Score not found' });
         }
         res.status(200).json(score);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 const updateScore = async (req, res, next) => {
     const { id } = req.params;
     try {
-        const score = await updateScoreService(id, req.body);
+        const score = await scoreService.updateScoreService(id, req.body);
         res.status(200).json(score);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
 const deleteScore = async (req, res, next) => {
     const { id } = req.params;
     try {
-        await deleteScoreService(id);
+        await scoreService.deleteScoreService(id);
         res.status(204).send();
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 };
 
-export {createScore, getScores, getScoreById, updateScore, deleteScore};
+export default {
+    createScore, 
+    getScores, 
+    getScoreById, 
+    updateScore, 
+    deleteScore
+};

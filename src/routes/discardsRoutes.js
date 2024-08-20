@@ -1,19 +1,13 @@
 import { Router } from "express";
-import {
-    createDiscardCard,
-    getDiscardCards,
-    getDiscardCardById,
-    updateDiscardCard,
-    deleteDiscardCard
-} from "../controllers/discardsController.js";
+import discardsController from "../controllers/discardsController.js";
 
 const router = Router();
 
-router.post('/discards', createDiscardCard);
-router.get('/discards', getDiscardCards);
-router.get('/discards/:id', getDiscardCardById);
-router.put('/discards/:id', updateDiscardCard);
-router.delete('/discards/:id', deleteDiscardCard);
+router.post('/discards', discardsController.createDiscardCard);
+router.get('/discards', discardsController.getDiscardCards);
+router.get('/discards/:id', discardsController.getDiscardCardById);
+router.put('/discards/:id', discardsController.updateDiscardCard);
+router.delete('/discards/:id', discardsController.deleteDiscardCard);
 
 
 export default router;

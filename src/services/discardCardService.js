@@ -61,7 +61,8 @@ const getLastCard = async (idGame) => {
     }
 };
 
-export {createDiscardCardService, 
+export default {
+    createDiscardCardService, 
     getDiscardCardsService,
     getDiscardCardByIdService,
     updateDiscardCardService,

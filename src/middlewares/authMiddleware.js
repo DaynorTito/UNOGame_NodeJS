@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { validateToken } from '../services/authService.js';
+import validateToken from '../services/authService.js';
 
 
 export const authMiddleware = async (req, res, next) => {
@@ -17,4 +17,4 @@ export const authMiddleware = async (req, res, next) => {
       console.error('Error verifying token:', error);
       return res.status(401).json({ error: 'Invalid token' });
     }
-  };
+};
