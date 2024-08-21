@@ -1,30 +1,32 @@
-import Card from "../models/card.js";
+import container from "../config/container.js"
+
+const cardRepository = container.resolve('cardRepository');
 
 const createCardService = async (cardData) => {
-    return await Card.create(cardData);
+    return await cardRepository.create(cardData);
 };
 
 const getCardsService = async () => {
-    return await Card.findAll();
+    return await cardRepository.findAll();
 };
 
 const getCardByIdService = async (id) => {
-    return await Card.findByPk(id);
+    return await cardRepository.findById(id);
 };
 
 const updateCardService = async (id, updateData) => {
-    const card = await Card.findByPk(id);
+    const card = await cardRepository.findById(id);
     if (card) {
-        await card.update(updateData);
+        await cardRepository.update(id, updateData);
         return card;
     }
     throw new Error('Card not found');
 };
 
 const deleteCardService = async(id) => {
-    const card = await Card.findByPk(id);
+    const card = await cardRepository.findById(id);
     if (card) {
-        await card.destroy();
+        await cardRepository.delete(id);
         return true;
     }
     throw new Error('Card not found');
