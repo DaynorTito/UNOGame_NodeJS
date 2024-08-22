@@ -16,6 +16,10 @@ export default class IAttendeeRepository {
         throw new Error("Method 'findAll()' must be implemented.");
     }
 
+    async findAllByClause(whereClause) {
+        throw new Error("Method 'findAllByClause()' must be implemented.");
+    }
+
     async update(id, entity) {
         throw new Error("Method 'update()' must be implemented.");
     }

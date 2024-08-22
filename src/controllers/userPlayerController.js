@@ -3,7 +3,7 @@ import userPlayerService from '../services/userPlayerService.js';
 const registerUserPlayer = async (req, res, next) => {
     try {
         const user = await userPlayerService.registerUserPlayerService(req.body);
-        res.status(200).json({message: "User registered successfully"});
+        res.status(200).json({message: "User registered successfully", userId: user.id});
     } catch (error) {
         next(error);
     }

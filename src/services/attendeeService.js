@@ -1,19 +1,17 @@
 import { AlreadyExistsError, NotFoundError, ValidationError } from "../errors/customError.js";
-import getGameByIdService from "./gameService.js";
 import { UserStatus } from "../utils/userStatus.js"
-import Game from "../models/game.js";
-
 import container from "../config/container.js"
+import { GameStatus } from "../utils/gameStatus.js";
 
 const attendeeRepository = container.resolve('attendeeRepository');
 const gameRepository = container.resolve('gameRepository');
 
 
 const createAttendeeService = async (attendeeData, user) => {
-    const game = await getGameByIdService(attendeeData.gameId);
+    const game = await gameRepository.findById(attendeeData.gameId);
     if (!game)
         throw new ValidationError('Game does not exist');
-    const existingAttendee = await attendeeRepository.findOne({where: {gameId: attendeeData.gameId, userId: user.id}});
+    const existingAttendee = await attendeeRepository.findOneByClause({gameId: attendeeData.gameId, userId: user.id});
     if (existingAttendee)
         throw new AlreadyExistsError();
     const numberPlayerJoined = await getNroPlayersJoined(game.id);
@@ -51,7 +49,9 @@ const deleteAttendeeService = async(id) => {
 };
 
 const leaveAttendeeService = async(idGame, idUser) => {
-    const game = await gameRepository.findOneByClause({ id: idGame, status: 'active' });
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    console.log(idGame, idUser)
+    const game = await gameRepository.findOneByClause({ id: idGame, status: GameStatus.IN_PROGRESS });
     if (!game)
         throw new ValidationError('Game not found or not active');
     
@@ -64,7 +64,7 @@ const leaveAttendeeService = async(idGame, idUser) => {
 };
 
 const markAsReady =  async(idGame, idUser) => {
-    const attendee = await attendeeRepository.findOne({where: { gameId: idGame, userId: idUser}});
+    const attendee = await attendeeRepository.findOneByClause({ gameId: idGame, userId: idUser});
     if (!attendee || attendee.status === UserStatus.READY)
         throw new ValidationError('Is not part of the game or already is ready');
     const updateData = { status: UserStatus.READY };
@@ -72,7 +72,7 @@ const markAsReady =  async(idGame, idUser) => {
 };
 
 const getPlayersGame = async(idGame) => {
-    const attendees = await attendeeRepository.findAll({where: { gameId: idGame }}); 
+    const attendees = await attendeeRepository.findAllByClause({ gameId: idGame });
     if (attendees.length === 0)
         throw new ValidationError('There are no players in this game');
     const userIds = attendees.map(attendee => attendee.userId);
@@ -80,12 +80,12 @@ const getPlayersGame = async(idGame) => {
 };
 
 const getNroPlayersJoined = async(idGame) => {
-    const attendees = await attendeeRepository.findAll({where: { gameId: idGame }});
+    const attendees = await attendeeRepository.findAllByClause({ gameId: idGame });
     return attendees.length;
 };
 
 const getUserNextTurn =  async(idGame, turn) => {
-    const attendee = await attendeeRepository.findOne({where: { gameId: idGame, turn: turn}});
+    const attendee = await attendeeRepository.findOneByClause({ gameId: idGame, turn: turn});
     return attendee.userId;
 };
 

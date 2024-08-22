@@ -1,4 +1,4 @@
-import getUserPlayerByIdService from "../services/userPlayerService.js";
+import userPlayerService from "../services/userPlayerService.js";
 import gameService from "../services/gameService.js";
 
 const createGame = async (req, res, next) => {
@@ -55,9 +55,10 @@ const deleteGame = async (req, res, next) => {
 const startGame = async (req, res, next) => {
     const { gameId } = req.body;
     const user = req.user;
+    console.log(user)
     try {
         const game = await gameService.startGameService(gameId, req.body, user.id)
-        res.status(200).json({message: 'Game started successfully'});
+        res.status(200).json({message: 'Game started successfully', idGame: game});
     } catch (error) {
         next(error);
     }
@@ -68,7 +69,7 @@ const finishGame = async (req, res, next) => {
     const user = req.user;
     try {
         const game = await gameService.endGameService(gameId, req.body, user.id)
-        res.status(200).json({message: 'Game ended successfully'});
+        res.status(200).json({message: 'Game ended successfully', idGame: game.id});
     } catch (error) {
         next(error);
     }
@@ -100,7 +101,7 @@ const getNextPlayer = async (req, res, next) => {
     const { gameId } = req.body;
     try {
         const idNextPlayer = await gameService.getNextTurnService(gameId);
-        const player = await getUserPlayerByIdService(idNextPlayer);
+        const player = await userPlayerService.getUserPlayerByIdService(idNextPlayer);
         res.status(200).json({gameId, username: player.username});
     } catch (error) {
         next(error);

@@ -3,7 +3,7 @@ import attendeeService from "../services/attendeeService.js";
 const createAttendee = async (req, res, next) => {
     try {
         const attendee = await attendeeService.createAttendeeService(req.body, req.user);
-        res.status(201).json({message: 'User joined the game successfully'});
+        res.status(201).json({message: 'User joined the game successfully', userId: attendee.userId});
     } catch (error) {
         next(error);
     }
@@ -67,7 +67,7 @@ const userMarkAsReady = async (req, res, next) => {
     const user = req.user;
     try {
         const attendee = await attendeeService.markAsReady(gameId, user.id);
-        res.status(200).json({message: 'User mark as ready successfully'});
+        res.status(200).json({message: 'User mark as ready successfully', idUser: attendee.userId});
     } catch (error) {
         next(error);
     }

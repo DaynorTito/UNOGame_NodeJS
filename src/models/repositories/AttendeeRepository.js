@@ -17,6 +17,11 @@ export class AttendeeRepository extends IAttendeeRepository {
         return attendees;
     }
 
+    async findAllByClause(whereClause) {
+        const attendees = await this.AttendeeModel.findAll({ where: whereClause });
+        return attendees;
+    }
+
     async update(id, entity) {
         const attendee = await this.AttendeeModel.findByPk(id);
         await attendee.update(entity);

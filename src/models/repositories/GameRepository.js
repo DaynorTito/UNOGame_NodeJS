@@ -12,6 +12,11 @@ export class GameRepository extends IGameRepository {
         return game;
     }
 
+    async findAllByClause(whereClause) {
+        const games = await this.GameModel.findAll({ where: whereClause });
+        return games;
+    }
+
     async findAll() {
         const games = await this.GameModel.findAll();
         return games;

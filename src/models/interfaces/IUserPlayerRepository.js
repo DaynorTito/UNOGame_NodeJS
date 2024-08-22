@@ -13,6 +13,10 @@ export default class IUserPlayerRepository {
         throw new Error("Method 'findById()' must be implemented.");
     }
 
+    async findAllByIds(attendees) {
+        throw new Error("Method 'findById()' must be implemented.");
+    }
+
     async findAll() {
         throw new Error("Method 'findAll()' must be implemented.");
     }

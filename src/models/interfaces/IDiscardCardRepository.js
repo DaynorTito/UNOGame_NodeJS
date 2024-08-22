@@ -25,6 +25,6 @@ export default class IDiscardCardRepository {
     }
 
     async bulkCreate(entities) {
-        throw new Error("Method 'delete()' must be implemented.");
+        throw new Error("Method 'bulkCreate()' must be implemented.");
     }
 }

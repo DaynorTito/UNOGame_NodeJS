@@ -33,13 +33,4 @@ export class DiscardCardRepository extends IDiscardCardRepository {
     async bulkCreate(entities) {
         return await this.DiscardModel.bulkCreate(entities);
     }
-
-    // async getRandomUnusedCard(idGame) {
-    //     const randomId = Math.floor(Math.random() * 108) + 1;  // Suponiendo que hay 108 cartas
-    //     const card = await this.DiscardModel.findByPk(randomId);
-    //     if (card && card.status === 'UNUSED') {
-    //         return card;
-    //     }
-    //     return null;
-    // }
 }

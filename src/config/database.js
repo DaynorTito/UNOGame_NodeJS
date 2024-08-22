@@ -12,11 +12,6 @@ const sequelize = new Sequelize(
     dialect: process.env.DB_DIALECT,
   }
 );
-// export async function initDatabase() {
-//   const databaseConf = new ConfigureMysqlDb();
-//   await databaseConf.connect();
-//   return databaseConf.initializeRepositories();
-// }
 
 export async function initDatabase() {
   try {

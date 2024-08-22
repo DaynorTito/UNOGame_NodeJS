@@ -17,6 +17,11 @@ export class UserPlayerRepository extends IUserPlayerRepository {
         return userPlayers;
     }
 
+    async findAllByIds(attendees) {
+        const attendee = await this.UserPlayerModel.findAll({where: {id: attendees}, attributes: ['username']});
+        return attendee;
+    }
+
     async update(id, entity) {
         const userPlayer = await this.UserPlayerModel.findByPk(id);
         await userPlayer.update(entity);

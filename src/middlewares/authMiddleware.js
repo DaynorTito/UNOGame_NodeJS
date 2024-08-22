@@ -1,5 +1,4 @@
-import jwt from 'jsonwebtoken';
-import validateToken from '../services/authService.js';
+import authService from '../services/authService.js';
 
 
 export const authMiddleware = async (req, res, next) => {
@@ -10,7 +9,7 @@ export const authMiddleware = async (req, res, next) => {
     }
     
     try {
-      const decoded = validateToken(authHeader);
+      const decoded = authService.validateToken(authHeader);
       req.user = decoded;
       next();
     } catch (error) {
