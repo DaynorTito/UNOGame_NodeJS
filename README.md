@@ -313,3 +313,143 @@ The project has an overall code coverage of 87.86%, which is a good indicator of
 ## Coverage report 
 
 ![alt text](/docs/images/reportCoverageHtml.png)
+
+
+## SOLID Principles Application
+
+This project adheres to SOLID principles to ensure a robust, maintainable, and extensible codebase. Here's how each principle is applied:
+
+### Single Responsibility Principle (SRP)
+
+Each module has a single responsibility. For example, we've separated game operations, state management, and validations:
+
+```javascript
+   // gameService.js - Handles basic CRUD operations
+   export const createGameService = async (gameData, user) => {
+      // ...
+   };
+
+   // gameStateService.js - Manages game state and everything concerning the status of an item
+   export const startGame = async (id, updateData, userId) => {
+      // ...
+   };
+
+   // gameValidationService.js - Handles game-specific validations before performing the game logic operations
+   export const validateGameStart = async (game, userId) => {
+      // ...
+   };
+```
+
+### Open/Closed Principle (OCP)
+The code is open for extension but closed for modification. We use interfaces and dependency injection to allow for easy extension:
+```javascript
+   // IGameRepository.js
+   export interface IGameRepository {
+      async create(entity) {
+         throw new Error("Method 'create()' must be implemented.");
+      }
+
+      async findById(id) {
+         throw new Error("Method 'findById()' must be implemented.");
+      }
+
+      async findAll() {
+         throw new Error("Method 'findAll()' must be implemented.");
+      }
+   }
+
+   // gameRepository.js
+   export class GameRepository implements IGameRepository {
+      // ...
+   }
+```
+All of this was also applied to the other entities and models that are handled in the game.
+
+
+## Liskov Substitution Principle (LSP)
+Subclasses can be substituted for their base classes. All our repositories implement the same interface, to comply with this principle we make use of Awilix with the help of a file called container.js as follows:
+
+```javascript
+// In the container configuration
+   container.register({
+      gameRepository: asClass(GameRepository).singleton(),
+      attendeeRepository: asClass(AttendeeRepository).singleton(),
+      // ...
+   });
+```
+
+
+## Interface Segregation Principle (ISP)
+
+We apply the Interface Segregation Principle by creating smaller, more focused objects that define the structure of our repositories and services. This allows us to depend on smaller, more specific contracts. For example:
+
+```javascript
+// attendeeRepository.js
+const attendeeRepositoryMethods = {
+    findByGameId: async (gameId) => { /* ... */ },
+    updateStatus: async (attendeeId, status) => { /* ... */ }
+};
+
+// gameRepository.js
+const gameRepositoryMethods = {
+    create: async (gameData) => { /* ... */ },
+    findById: async (id) => { /* ... */ },
+    updateStatus: async (gameId, status) => { /* ... */ }
+};
+
+// We can then use these method objects to create our repositories
+const createAttendeeRepository = (db) => ({
+    ...attendeeRepositoryMethods,
+    // db-specific implementations
+});
+```
+By defining these method objects separately, we ensure that each service only depends on the methods it needs. This reduces coupling and makes the system more flexible and easier to maintain.
+We also create specific service objects that define only the methods needed for particular operations:
+
+```javascript
+// gameStateService.js
+const gameStateServiceMethods = {
+    startGame: async (gameId, userId) => { /* ... */ },
+    endGame: async (gameId, userId) => { /* ... */ },
+    getNextTurn: async (gameId) => { /* ... */ }
+};
+
+// gameValidationService.js
+const gameValidationServiceMethods = {
+    validateGameStart: async (game, userId) => { /* ... */ },
+    validateGameEnd: async (game, userId) => { /* ... */ }
+};
+
+// We can then create our services using these method objects
+const createGameStateService = (dependencies) => ({
+    ...gameStateServiceMethods,
+    // implementation using dependencies
+});
+```
+This approach allows us to have focused "interfaces" that cater to specific needs of different parts of our application, adhering to the Interface Segregation Principle even in a dynamically-typed language like JavaScript.
+
+
+## Dependency Inversion Principle (DIP)
+We depend on abstractions, not concretions. This is achieved through dependency injection using Awilix:
+```javascript
+   import { createContainer, asClass, asFunction } from 'awilix';
+
+   const container = createContainer();
+
+   container.register({
+      gameService: asFunction(gameService),
+      gameRepository: asClass(GameRepository).singleton(),
+      // ...
+   });
+
+   export default container;
+```
+In our services, we resolve dependencies from the container:
+
+```javascript
+   import container from "../config/container.js";
+   const gameRepository = container.resolve('gameRepository');
+```
+
+
+By applying these principles, we've created a flexible architecture that's easy to extend and maintain. New game rules, repositories, or services can be added with minimal changes to existing code.
