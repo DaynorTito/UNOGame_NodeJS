@@ -6,7 +6,7 @@ import {CardRepository} from '../models/repositories/CardRepository.js';
 import {DiscardCardRepository} from '../models/repositories/DiscardCardRepository.js';
 import {ScoreRepository} from '../models/repositories/ScoreRepository.js';
 import {UserPlayerRepository} from '../models/repositories/UserPlayerRepository.js';
-import { LoginHandler } from '../services/LoginHandler.js';
+import { LoginHandler } from '../services/authentication/LoginHandler.js';
 
 import Attendee from '../models/attendee.js';
 import Game from '../models/game.js';

@@ -1,5 +1,6 @@
 import userPlayerService from "../services/userPlayerService.js";
 import gameService from "../services/gameService.js";
+import gameStateService from "../services/game/gameStateService.js";
 
 const createGame = async (req, res, next) => {
     try {
@@ -55,10 +56,9 @@ const deleteGame = async (req, res, next) => {
 const startGame = async (req, res, next) => {
     const { gameId } = req.body;
     const user = req.user;
-    console.log(user)
     try {
-        const game = await gameService.startGameService(gameId, req.body, user.id)
-        res.status(200).json({message: 'Game started successfully', idGame: game});
+        const game = await gameStateService.startGameService(gameId, req.body, user.id)
+        res.status(200).json({message: 'Game started successfully', idGame: game.id});
     } catch (error) {
         next(error);
     }
@@ -68,7 +68,7 @@ const finishGame = async (req, res, next) => {
     const { gameId } = req.body;
     const user = req.user;
     try {
-        const game = await gameService.endGameService(gameId, req.body, user.id)
+        const game = await gameStateService.endGameService(gameId, req.body, user.id)
         res.status(200).json({message: 'Game ended successfully', idGame: game.id});
     } catch (error) {
         next(error);
@@ -90,7 +90,7 @@ const getStatusGame = async (req, res, next) => {
 const getPlayersGame = async (req, res, next) => {
     const { gameId } = req.body;
     try {
-        const players = await gameService.getPlayersService(gameId);
+        const players = await gameStateService.getPlayersService(gameId);
         res.status(200).json({gameId, players});
     } catch (error) {
         next(error);
@@ -100,7 +100,7 @@ const getPlayersGame = async (req, res, next) => {
 const getNextPlayer = async (req, res, next) => {
     const { gameId } = req.body;
     try {
-        const idNextPlayer = await gameService.getNextTurnService(gameId);
+        const idNextPlayer = await gameStateService.getNextTurnService(gameId);
         const player = await userPlayerService.getUserPlayerByIdService(idNextPlayer);
         res.status(200).json({gameId, username: player.username});
     } catch (error) {

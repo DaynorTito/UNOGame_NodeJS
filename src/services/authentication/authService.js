@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import container from "../config/container.js";
+import container from "../../config/container.js";
 
 const userPlayerRepository = container.resolve('loginHandler');
 

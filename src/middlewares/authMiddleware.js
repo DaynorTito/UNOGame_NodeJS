@@ -1,4 +1,4 @@
-import authService from '../services/authService.js';
+import authService from '../services/authentication/authService.js';
 
 
 export const authMiddleware = async (req, res, next) => {

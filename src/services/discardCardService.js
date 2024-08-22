@@ -25,16 +25,6 @@ const updateDiscardCardService = async (id, updateData) => {
     throw new Error('DiscardCard not found');
 };
  
-const startPileDiscards = async (idGame) => {
-    try {
-        const cards = await cardRepository.findAll();
-        const discardCardEntries = cards.map(card => ({ gameId: idGame, cardId: card.id }));
-        await discardCardRepository.bulkCreate(discardCardEntries);
-    } catch (error) {
-        throw new Error('Error when adding cards to the game');
-    }
-};
-
 const deleteDiscardCardService = async(id) => {
     const card = await discardCardRepository.findById(id);
     if (card) {
@@ -44,6 +34,16 @@ const deleteDiscardCardService = async(id) => {
     throw new Error('DiscardCard not found');
 };
 
+const startPileDiscards = async (idGame) => {
+    try {
+        const cards = await cardRepository.findAll();
+        const discardCardEntries = cards.map(card => ({ gameId: idGame, cardId: card.id }));
+        await discardCardRepository.bulkCreate(discardCardEntries);
+    } catch (error) {
+        console.log(error)
+    }
+};
+
 const getRandomNumber = (lastNum) => {
     return Math.floor(Math.random() * lastNum) + 1;
 };
@@ -51,12 +51,12 @@ const getRandomNumber = (lastNum) => {
 const getLastCard = async (idGame) => {
     const randomId = getRandomNumber(108);
     const card = await discardCardRepository.findById(randomId);
-
+    
     if (card) {
         if (card.status === CardStatus.UNUSED) {
             return card;
         } else {
-            return { message: 'Card is already used, try another one.' };
+            return { message: 'Card is already used, try another one.', idGame };
         }
     } else {
         return { message: 'Card not found.' };

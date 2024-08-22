@@ -1,4 +1,4 @@
-import authService from "../services/authService.js";
+import authService from "../services/authentication/authService.js";
 
 const loginUser = async(req, res, next) => {
   const {username, password} = req.body;

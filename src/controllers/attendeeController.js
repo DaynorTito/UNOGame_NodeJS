@@ -1,8 +1,9 @@
 import attendeeService from "../services/attendeeService.js";
+import gameJoinService from "../services/game/gameJoinService.js";
 
 const createAttendee = async (req, res, next) => {
     try {
-        const attendee = await attendeeService.createAttendeeService(req.body, req.user);
+        const attendee = await gameJoinService.joinGame(req.body, req.user);
         res.status(201).json({message: 'User joined the game successfully', userId: attendee.userId});
     } catch (error) {
         next(error);
@@ -55,7 +56,7 @@ const leaveAttendeeInProgess = async (req, res, next) => {
     const { gameId } = req.body;
     const user = req.user;
     try {
-        await attendeeService.leaveAttendeeService(gameId, user.id);
+        await gameJoinService.leaveAttendee(gameId, user.id);
         res.status(200).json({message: 'User left the game successfully'});
     } catch (error) {
         next(error);
@@ -66,7 +67,7 @@ const userMarkAsReady = async (req, res, next) => {
     const { gameId } = req.body;
     const user = req.user;
     try {
-        const attendee = await attendeeService.markAsReady(gameId, user.id);
+        const attendee = await gameJoinService.markAsReady(gameId, user.id);
         res.status(200).json({message: 'User mark as ready successfully', idUser: attendee.userId});
     } catch (error) {
         next(error);
