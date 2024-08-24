@@ -7,10 +7,12 @@ import authRouter from './routes/authRoutes.js';
 import attendeeRouter from './routes/attendeeRoutes.js';
 import discardRouter from './routes/discardsRoutes.js';
 import errorHandler from './middlewares/errorHandler.js';
+import { loggerRegister } from './middlewares/loggerMiddleware.js';
 
 export function initServer(port) {
     const app = express();
     app.use(express.json());
+    app.use(loggerRegister);
 
     app.use('/api/v1',cardRouter);
     app.use('/api/v1',gameRouter);

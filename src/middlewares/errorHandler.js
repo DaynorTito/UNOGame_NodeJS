@@ -1,18 +1,28 @@
+
 const errorHandler = (err, req, res, next) => {
     const statusCode = err.status || 500;
-    const messageError = err.message || 'Internal Server Error';
-    
-    if (err.name === 'ValidationError') {
-        return res.status(400).json({ error: err.message });
-    }
+    const userMessage = err.userMessage || 'Something went wrong. Please try again later.';
+    const developerMessage = err.message || 'Internal Server Error';
+    const requestId = req.headers['x-request-id'] || 'N/A';
 
     const response = {
         error: {
-            message: err.message || messageError,
+            status: statusCode,
+            message: userMessage,
+            path: req.originalUrl,
+            method: req.method,
+            requestId: requestId,
         }
     };
-    console.log(err);
+    req.logger.error('Error occurred', {
+        statusCode,
+        path: req.originalUrl,
+        method: req.method,
+        requestId: requestId,
+        errorMessage: developerMessage,
+        stack: err.stack,
+    });
     res.status(statusCode).json(response);
-};
+}
 
 export default errorHandler;

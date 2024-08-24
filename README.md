@@ -19,13 +19,22 @@ UNOGame_NodeJS/
 │   ├── errors/
 │   ├── middlewares/
 │   ├── models/
+│   │   ├── dto/
+│   │   ├── interfaces/
+│   │   └── repositories/
 │   ├── routes/
 │   ├── services/
+│   │   ├── authentication/
+│   │   ├── cards/
+│   │   ├── game/
+│   │   └── validations/
 │   ├── utils/
 │   ├── app.js
 │   └── index.js
 ├── .env
+├── .babelrc
 ├── .gitignore
+├── eslint.config.js
 ├── package-lock.json
 ├── package.json
 └── README.md
