@@ -56,10 +56,32 @@ To start the server, make sure you have all the dependencies installed and then 
    ```bash
     .env
    ```
-4. Once the dependencies are installed, you can start the server with the following command:
+   ### Environment Variables Configuration
+   Before running the application, you need to configure your environment variables. A .env.template file is provided in the project root, which you can use as a starting point.
+
+   Steps to Configure:
+   Copy the template:
+
    ```bash
-    node src/index.js
+      cp .env.template .env
    ```
+
+   Fill in the required variables: Open the newly created .env file and fill in the necessary environment variables:
+
+   ```env
+   DB_NAME=        # Your database name
+   DB_USER=        # Your database username
+   DB_PASSWORD=    # Your database password
+   DB_HOST=        # The database host (e.g., localhost)
+   DB_DIALECT=     # The database dialect (e.g., postgres, mysql)
+   SECRET=         # Your secret key for authentication
+   ```
+
+4. Once the dependencies are installed, and configure .env configuration, you can start the server with the following command:
+   ```bash
+    pnpm run dev
+   ```
+
 
 ## Description of Routes
 
