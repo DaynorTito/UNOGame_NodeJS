@@ -462,3 +462,34 @@ In our services, we resolve dependencies from the container:
 
 
 By applying these principles, we've created a flexible architecture that's easy to extend and maintain. New game rules, repositories, or services can be added with minimal changes to existing code.
+
+
+## Logger with Winston
+
+This project uses [Winston](https://github.com/winstonjs/winston) for logging to provide comprehensive and structured logs. Winston is configured to handle different log levels, format logs with timestamps, and include request-specific information such as UUIDs for better traceability.
+
+### Usage
+Adding Request IDs
+Each incoming HTTP request is assigned a unique RequestId using a middleware that generates a UUID and attaches it to the request object. This UUID is then passed to Winston to ensure that all logs associated with that request are tagged consistently.
+
+
+### Logging Examples
+- **Info Logs:** General information about requests, responses, or system behavior.
+
+```javascript
+req.logger.info('User logged in successfully', { userId: req.user.id });
+```
+- **Error Logs:** When an error occurs, the stack trace is automatically included in the log.
+
+```javascript
+req.logger.error('Failed to process payment', { error: err.message });
+```
+
+### Log Files
+The logs are saved in two files:
+
+- **error.log:** Stores only error logs.
+- **combined.log:** Stores all logs (info, errors, etc.).
+- **exceptions.log:** Stores logs of unhandled exceptions and critical errors. This file is crucial for tracking down bugs and issues that lead to application crashes or unexpected behaviors.
+
+These files can be found in the root directory of the project.
