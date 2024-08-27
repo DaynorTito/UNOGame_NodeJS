@@ -18,6 +18,11 @@ export class DiscardCardRepository extends IDiscardCardRepository {
         return discards;
     }
 
+    async findAllByClause(whereClause) {
+        const discards = await this.DiscardModel.findAll({ where: whereClause });
+        return discards;
+    }
+
     async update(id, entity) {
         const card = await this.DiscardModel.findByPk(id);
         await card.update(entity);
@@ -32,5 +37,10 @@ export class DiscardCardRepository extends IDiscardCardRepository {
 
     async bulkCreate(entities) {
         return await this.DiscardModel.bulkCreate(entities);
+    }
+
+    async findOneByClause(whereClause) {
+        const discards = await this.DiscardModel.findOne({ where: whereClause });
+        return discards;
     }
 }

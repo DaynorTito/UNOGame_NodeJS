@@ -2,6 +2,7 @@ import { DataTypes } from "sequelize";
 import sequelize from "../config/database.js";
 import Game from "./game.js";
 import Card from "./card.js";
+import UserPlayer from "./userPlayer.js";
 
 const DiscardCard = sequelize.define('DiscardCard', {
     id: {
@@ -25,8 +26,21 @@ const DiscardCard = sequelize.define('DiscardCard', {
             key: 'id'
         }
     },
+    userId: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        references: {
+            model: UserPlayer,
+            key: 'id'
+        }
+    },
+    top: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false
+    },
     state: {
-        type: DataTypes.ENUM('discard', 'unused'),
+        type: DataTypes.ENUM('used', 'unused', 'in play'),
         allowNull: false,
         defaultValue: 'unused'
     }

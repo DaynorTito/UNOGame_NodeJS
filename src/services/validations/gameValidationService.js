@@ -5,6 +5,7 @@ import container from "../../config/container.js";
 import gameStateService from "../game/gameStateService.js";
 
 const attendeeRepository = container.resolve('attendeeRepository');
+const gameRepository = container.resolve('gameRepository');
 
 
 export const validateGameStart = async (game, userId) => {
@@ -20,17 +21,21 @@ export const validateGameStart = async (game, userId) => {
 };
 
 export const validateGameEnd = async (game, userId) => {
-    if (game.status !== GameStatus.IN_PROGRESS)
-        throw new ValidationError('Game is not in progress');
+    await validateGameInProgress(game.id);
     if (game.userCreatedId !== userId)
         throw new UnauthorizedError('Only the creator can finish the game');
 };
 
 export const validateGameTurn = async (game)=> {
-    if (game.status != GameStatus.IN_PROGRESS)
-        throw new ValidationError('Game is not in progress');
+    await validateGameInProgress(game.id);
     const userCurrent = await gameStateService.getUserNextTurn(game.id, game.currentTurn);
     if (!userCurrent)
         throw new ValidationError('There are not any players in this game');
     return userCurrent;
+};
+
+export const validateGameInProgress = async (idGame) => {
+    const game = await gameRepository.findById(idGame);
+    if (game.status != GameStatus.IN_PROGRESS)
+        throw new ValidationError('Game is not in progress');
 };

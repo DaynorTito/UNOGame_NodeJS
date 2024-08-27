@@ -12,7 +12,7 @@ const gameRepository = container.resolve('gameRepository');
 const joinGame = async (attendeeData, user) => {
     const game = await gameRepository.findById(attendeeData.gameId);
     if (!game) throw new ValidationError('Game does not exist');
-
+    if (game.status == GameStatus.IN_PROGRESS) throw new ValidationError('Game already start');
     await attendeeValidationService.validateJoinGame(game, user);
 
     const numberPlayerJoined = await getNumberPlayersJoined(game.id);

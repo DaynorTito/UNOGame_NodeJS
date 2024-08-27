@@ -16,6 +16,10 @@ export class UserPlayerRepository extends IUserPlayerRepository {
         const userPlayers = await this.UserPlayerModel.findAll();
         return userPlayers;
     }
+    async findAllByClause(whereClause) {
+        const userPlayers = await this.UserPlayerModel.findAll({ where: whereClause });
+        return userPlayers;
+    }
 
     async findAllByIds(attendees) {
         const attendee = await this.UserPlayerModel.findAll({where: {id: attendees}, attributes: ['username']});

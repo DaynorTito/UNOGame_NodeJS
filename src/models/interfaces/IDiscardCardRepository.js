@@ -16,6 +16,10 @@ export default class IDiscardCardRepository {
         throw new Error("Method 'findAll()' must be implemented.");
     }
 
+    async findAllByClause(whereClause) {
+        throw new Error("Method 'findAllByClause()' must be implemented.");
+    }
+
     async update(id, entity) {
         throw new Error("Method 'update()' must be implemented.");
     }
@@ -26,5 +30,9 @@ export default class IDiscardCardRepository {
 
     async bulkCreate(entities) {
         throw new Error("Method 'bulkCreate()' must be implemented.");
+    }
+
+    async findOneByClause(entiwhereClauseties) {
+        throw new Error("Method 'findOneByClause()' must be implemented.");
     }
 }

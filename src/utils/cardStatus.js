@@ -1,4 +1,5 @@
 export const CardStatus = Object.freeze({
     UNUSED: 'unused',
-    DISCARD: 'discard'
+    USED: 'used',
+    IN_PLAY: 'in play'
 });

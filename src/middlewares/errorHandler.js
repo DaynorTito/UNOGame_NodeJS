@@ -1,6 +1,6 @@
 
 const errorHandler = (err, req, res, next) => {
-    const statusCode = err.status || 500;
+    const statusCode = err.statusCode || 500;
     const userMessage = err.userMessage || 'Something went wrong. Please try again later.';
     const developerMessage = err.message || 'Internal Server Error';
     const requestId = req.headers['x-request-id'] || 'N/A';
@@ -8,7 +8,7 @@ const errorHandler = (err, req, res, next) => {
     const response = {
         error: {
             status: statusCode,
-            message: userMessage,
+            message: developerMessage,
             path: req.originalUrl,
             method: req.method,
             requestId: requestId,
