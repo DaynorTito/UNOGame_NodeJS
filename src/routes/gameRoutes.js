@@ -15,4 +15,5 @@ router.get('/statusGame', gameController.getStatusGame);
 router.get('/playersGame', gameController.getPlayersGame);
 router.get('/nextPlayer', gameController.getNextPlayer);
 router.post('/dealCards', gameController.dealCardsGame);
+router.post('/playCard', authMiddleware, gameController.playCardUser);
 export default router;

@@ -2,6 +2,7 @@ import userPlayerService from "../services/userPlayerService.js";
 import gameService from "../services/gameService.js";
 import gameStateService from "../services/game/gameStateService.js";
 import dealCards from "../services/cards/dealCards.js"
+import playCard from "../services/cards/playCard.js";
 
 const createGame = async (req, res, next) => {
     try {
@@ -119,7 +120,18 @@ const dealCardsGame = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
-}
+};
+
+const playCardUser = async (req, res, next) => {
+    const { gameId, player, cardPlayed } = req.body;
+    const user = req.user;
+    try {
+        const nextCard = await playCard.playCardPlayer(gameId, player, cardPlayed, user);
+        res.status(200).json({message: 'Card played successfully ', nextCard});
+    } catch (error) {
+        next(error);
+    }
+};
 
 export default {
     createGame, 
@@ -132,5 +144,6 @@ export default {
     getStatusGame, 
     getPlayersGame, 
     getNextPlayer,
-    dealCardsGame
+    dealCardsGame,
+    playCardUser
 };
