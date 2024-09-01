@@ -19,11 +19,13 @@ const playCardPlayer = async (gameId, player, cardPlayed, user) => {
     if(win) return { nextStep: win.message, playerCurrent: win.scoresArray};
     const playerCurrent = await nextPlaterTurn(gameId);
     const nextStep = await getCardTopCurrentData(cardPlayed, user, gameId, player);
+    console.log(nextStep)
+
     return { nextStep, playerCurrent };
 };
 
 const beforePlayCard = async (user, player, gameId) => {
-    await attendeeValidationService.validateUserName(user, player);
+    attendeeValidationService.validateUserName(user, player);
     await validateGameInProgress(gameId);
     await VarifyTopCard(gameId);
     await validateTurnPlayer(gameId, user.id);
@@ -133,5 +135,10 @@ const isValidCard = (topCard) => (card) =>
 export default {
     playCardPlayer,
     drawnCard,
-    getLastCard
+    getLastCard,
+    beforePlayCard,
+    getCardTopCurrentData,
+    updatePlayCard,
+    verifyAvailabilityCard,
+    getCardPlayCurrent
 }

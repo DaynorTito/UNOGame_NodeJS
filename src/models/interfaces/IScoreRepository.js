@@ -1,7 +1,7 @@
 export default class IScoreRepository {
     
-    constructor({ gameModel }) {
-        this.GameModel = gameModel;
+    constructor({ scoreModel }) {
+        this.ScoreModel = scoreModel;
     }
 
     async create(entity) {

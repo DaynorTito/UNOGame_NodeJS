@@ -436,15 +436,17 @@ The test report generated can be found in the folder:
 ### Test Results
 All tests were executed correctly, with a total of 124 tests passing successfully.
 
-- **Test Suites:** 13 passed, 13 in total
+- **Test Suites:** 1 failed, 25 passed, 26 total
 
-- **Tests:** 124 passed, 124 in total
+- **Tests:**  1 failed, 150 passed, 151 total
 
 - **Snapshots:** 0 in total
 
-- **Execution time:** 3,956 seconds
+- **Execution time:** 3.676 seconds
 
-- **Total coverage:** 87.86 %
+- **Total coverage:** 76.71 %
+
+
 
 
 ![alt text](/docs/images/reportCovCons.png)
@@ -462,19 +464,16 @@ A __test__ folder was created inside each project folder.
 Code coverage is an indicator of the amount of source code being executed by the tests. The following is a summary of code coverage:
 
 ### Total Coverage:
-Statements: 87.86%.
+Statements: 76.71%.
 
-Branches: 89.53%
+Branches: 44.44%
 
-Functions: 94.31% 
+Functions: 82.51% 
 
-Lines: 87.83% 
+Lines: 77.77% 
 
-The project has an overall code coverage of 87.86%, which is a good indicator of the quality and scope of the testing performed. The tests have covered all major areas of the code, ensuring that critical components work as expected.
+The project has an overall code coverage of 76.71%, which is a good indicator of the quality and scope of the testing performed. The tests have covered all major areas of the code, ensuring that critical components work as expected.
 
-## Coverage report 
-
-![alt text](/docs/images/reportCoverageHtml.png)
 
 
 ## SOLID Principles Application

@@ -67,5 +67,10 @@ const chooseCardToStart = (deck) => {
 };
 
 export default {
-    dealCardsPlayer
+    dealCardsPlayer,
+    chooseCardToStart,
+    putFirstCard,
+    shuffleDeck,
+    assignCardsToPlayer,
+    distributeCards
 }
