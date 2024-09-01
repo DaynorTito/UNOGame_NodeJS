@@ -1,12 +1,17 @@
 import { ValidationError } from "../errors/customError.js";
 import container from "../config/container.js"
+import { validateMaxPlayers } from "./validations/gameValidationService.js";
+import attendeeValidationService from "./validations/attendeeValidationService.js";
 
 const gameRepository = container.resolve('gameRepository');
 
-const createGameService = async (GameData, user) => {
+const createGameService = async (GameData, user, maxPlayers) => {
+    await attendeeValidationService.validateUserExist(user.id);
     GameData.userCreatedId = user.id;
     if (!GameData.userCreatedId)
         throw new ValidationError('You must provide a valid token access');
+    validateMaxPlayers(maxPlayers);
+
     return await gameRepository.create(GameData);
 };
 

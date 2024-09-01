@@ -8,6 +8,7 @@ router.get('/scores', scoreController.getScores);
 router.get('/scores/:id', scoreController.getScoreById);
 router.put('/scores/:id', scoreController.updateScore);
 router.delete('/scores/:id', scoreController.deleteScore);
+router.get('/scoresPlayers', scoreController.getPlayersScores);
 
 
 export default router;

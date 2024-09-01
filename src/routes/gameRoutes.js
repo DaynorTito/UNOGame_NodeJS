@@ -16,4 +16,11 @@ router.get('/playersGame', gameController.getPlayersGame);
 router.get('/nextPlayer', gameController.getNextPlayer);
 router.post('/dealCards', gameController.dealCardsGame);
 router.post('/playCard', authMiddleware, gameController.playCardUser);
+router.post('/drewCardFromDeck', authMiddleware, gameController.pickUpCard);
+router.post('/sayUno', authMiddleware, gameController.sayUno);
+router.post('/challengePlayer', authMiddleware, gameController.challengePlayer);
+router.post('/challengePlayer', authMiddleware, gameController.challengePlayer);
+router.get('/getCardDiscardPile', authMiddleware, gameController.getCardDiscardPile);
+
+
 export default router;

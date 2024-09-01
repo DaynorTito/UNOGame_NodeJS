@@ -1,10 +1,9 @@
 import container from "../../config/container.js";
 import { ValidationError } from "../../errors/customError.js";
 import { CardStatus } from "../../utils/cardStatus.js";
-import { userPlayersWithCards } from "../../utils/userPlayersCards.js";
+import { assignCardPlayer, shuffleCards, userPlayersWithCards } from "../../utils/userPlayersCards.js";
 import { validateGameInProgress } from "../validations/gameValidationService.js";
 
-const gameRepository = container.resolve('gameRepository');
 const cardRepository = container.resolve('cardRepository');
 const attendeeRepository = container.resolve('attendeeRepository');
 const discardCards = container.resolve('discardCardRepository'); 
@@ -22,10 +21,8 @@ const dealCardsPlayer = async (idGame, numberCards) => {
     await validateGameInProgress(idGame);
     const deck = await shuffleDeck();
     await distributeCards(attendees, deck, idGame, numberCards, 0);
-    await putFirstCard(deck, idGame);
-
-    const usersWithTheirCards = await userPlayersWithCards(attendees, idGame);
-    return usersWithTheirCards;
+    const firstCard = await putFirstCard(deck, idGame);
+    return await userPlayersWithCards(attendees, idGame);
 };
 
 const distributeCards = async (userPlayers, deck, idGame, numberCards, playerIndex) => {
@@ -42,23 +39,13 @@ const assignCardsToPlayer = async (idGame, player, playerCards, cardIndex) => {
     if (cardIndex >= playerCards.length)
         return;
     const card = playerCards[cardIndex];
-    await assignCardPlayer(idGame, player, card);
+    await assignCardPlayer(idGame, player.userId, card);
     await assignCardsToPlayer(idGame, player, playerCards, cardIndex + 1);
-};
-
-const assignCardPlayer = async (idGame, player, card) => {
-    const createCard = await discardCards.create({
-        gameId: idGame,
-        cardId: card.id,
-        userId: player.userId,
-        state: CardStatus.IN_PLAY
-    });
 };
 
 const shuffleDeck = async () => {
     const allCards = await cardRepository.findAll();
-    const mixedDeck = allCards.sort(() => Math.random() - 0.5);
-    return mixedDeck;
+    return shuffleCards(allCards);
 };
 
 const putFirstCard = async (deck, idGame) => {
@@ -69,6 +56,7 @@ const putFirstCard = async (deck, idGame) => {
         top: true,
         state: CardStatus.UNUSED
     });
+    return {color: cardDeck.color, value: cardDeck.value};
 };
 
 const chooseCardToStart = (deck) => {

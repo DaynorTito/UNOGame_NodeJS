@@ -17,6 +17,11 @@ export class CardRepository extends ICardRepository {
         return cards;
     }
 
+    async findAllByClause(whereClause) {
+        const cards = await this.CardModel.findAll({where: whereClause});
+        return cards;
+    }
+
     async update(id, entity) {
         const card = await this.CardModel.findByPk(id);
         await card.update(entity);

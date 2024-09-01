@@ -1,4 +1,5 @@
 import scoreService from "../services/scoreService.js";
+import calculateScores from "../services/scores/calculateScores.js";
 
 const createScore = async (req, res, next) => {
     try {
@@ -51,10 +52,21 @@ const deleteScore = async (req, res, next) => {
     }
 };
 
+const getPlayersScores = async (req, res, next) => {
+    const { gameId } = req.body;
+    try {
+        const scores = await calculateScores.getPlayersScores(gameId);
+        res.status(200).json({scores:scores });
+    } catch (error) {
+        next(error);
+    }
+};
+
 export default {
     createScore, 
     getScores, 
     getScoreById, 
     updateScore, 
-    deleteScore
+    deleteScore,
+    getPlayersScores
 };

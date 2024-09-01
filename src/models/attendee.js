@@ -29,6 +29,11 @@ const Attendee = sequelize.define('Attendee', {
         type: DataTypes.STRING,
         defaultValue: 'on hold'
     },
+    sayUno: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue: false
+    },
     turn: {
         type: DataTypes.INTEGER,
         allowNull: true

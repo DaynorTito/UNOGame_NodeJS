@@ -1,8 +1,9 @@
 
-import { ValidationError, AlreadyExistsError } from "../../errors/customError.js";
+import { ValidationError, AlreadyExistsError, UnauthorizedError } from "../../errors/customError.js";
 import container from "../../config/container.js";
 
 const attendeeRepository = container.resolve('attendeeRepository');
+const userPlayerRepository = container.resolve('userPlayerRepository');
 
 const validateJoinGame = async (game, user) => {
     const existingAttendee = await attendeeRepository.findOneByClause({gameId: game.id, userId: user.id});
@@ -14,6 +15,20 @@ const validateJoinGame = async (game, user) => {
       throw new ValidationError('You cannot join, game is full');
 };
 
+const validateUserExist = async (userId) => {
+    const user = await userPlayerRepository.findById(userId);
+    if(!user)
+      throw new ValidationError("Token acces invalid or user not registered");
+};
+
+const validateUserName = (user, player) => {
+  const userName = user.username;
+  if (userName!= player)
+      throw new UnauthorizedError("Your username does not match");
+};
+
 export default {
-  validateJoinGame
+  validateJoinGame,
+  validateUserExist,
+  validateUserName
 };

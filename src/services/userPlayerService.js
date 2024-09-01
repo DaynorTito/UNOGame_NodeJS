@@ -4,7 +4,8 @@ import container from "../config/container.js"
 const userPlayerRepository = container.resolve('userPlayerRepository');
 
 const registerUserPlayerService = async (userData) => {  
-    const existingUser = await getUserPlayerByIdService(userData.id); 
+    console.log(userData)
+    const existingUser = await getUserPlayerByname(userData.username); 
     if (existingUser)
         throw new AlreadyExistsError('User already exists');
     return await userPlayerRepository.create(userData);

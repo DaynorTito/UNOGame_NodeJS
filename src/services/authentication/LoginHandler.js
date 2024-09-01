@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-
+import { UnauthorizedError, ValidationError } from "../../errors/customError.js";
 export class LoginHandler {
 
     constructor ({userPlayerRepository}){
@@ -9,12 +9,12 @@ export class LoginHandler {
     async login(username, password) {
         const user = await this.userRepository.findOneByClause({username: username});
         if(!user) {
-            throw new Error('Inavid credentials');
+            throw new UnauthorizedError('Inavid credentials');
         }
         const isPasswordValid = await this.validateUserPassword(username, password);
 
         if(!isPasswordValid) {
-            throw new Error('Inavid password');
+            throw new UnauthorizedError('Inavid password');
         }
         const token = jwt.sign({id: user.id, username, email: user.email}, process.env.SECRET);
         return token;

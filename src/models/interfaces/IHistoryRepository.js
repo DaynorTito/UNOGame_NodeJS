@@ -1,7 +1,7 @@
-export default class ICardRepository {
+export default class IHistoryRepository {
     
-    constructor({ cardModel }) {
-        this.CardModel = cardModel;
+    constructor({ historyModel }) {
+        this.historyModel = historyModel;
     }
 
     async create(entity) {
@@ -19,12 +19,16 @@ export default class ICardRepository {
     async findAllByClause(whereClause) {
         throw new Error("Method 'findAllByClause()' must be implemented.");
     }
-
+    
     async update(id, entity) {
         throw new Error("Method 'update()' must be implemented.");
     }
 
     async delete(id) {
         throw new Error("Method 'delete()' must be implemented.");
+    }
+
+    async findOneByClause(whereClause) {
+        throw new Error("Method 'findOneByClause()' must be implemented.");
     }
 }

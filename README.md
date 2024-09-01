@@ -246,6 +246,137 @@ To access any endpoint it is necessary to authenticate by logging in, or if not 
 
 **Description**: To get the player whose turn it is to play, for this function the players will have a turn order of the way they joined the game and they will take turns from the first one to join, to the last one
 
+### Distribution of Cards to Players:
+
+`POST /api/v1/dealCards`
+```json
+{
+   "gameId": "2ce66004-a1d1-45dc-83ac-eb94a272b995",
+   "cardsPerPlayer": 7
+}
+```
+
+**Description**: Cards are distributed randomly to each of the game attendees, in the body of the request must be added the id of the game and also the number of cards to be distributed to each player, the expected response is status code 200 with the list of all game attendees with the respective cards that were distributed for this method, two recursive functions are used to randomly distribute and randomly assign the races, at the end a card is placed to start the game in the deck, this card is checked to make sure it is not a special card.
+
+### User can get top card dicard pile :
+
+`GET /api/v1/getCardDiscardPile`
+
+```json
+{
+   "gameId": "2ce66004-a1d1-45dc-83ac-eb94a272b995"
+}
+```
+
+**Description**: To get the card at the top of the discard pile you can access using the id of the game in the body of the request waiting for a status code 200 and the color and the card at the top.
+
+### Players can play a valid card of their cards:
+
+`POST /api/v1/playCard`
+
+```json
+{
+    "gameId": "2ce66004-a1d1-45dc-83ac-eb94a272b995",
+    "player": "juan123",
+    "cardPlayed": "Green 2"
+}
+```
+**Description**: Players after receiving the cards, can play the cards depending on the top card of the pile they have, it must match either in number, color or any special card, for this verification a composition of functions is used. Also a person must wait his turn to play the card and when the result is successful the card he played becomes the card on the top of the pile. You must enter in the body the id of the game, the username you want to play the card and the card you want to play, a status code 200, a success message, the card you played and the username of the next player in turn.
+
+### If a Player Cannot Play a Card, Must Draw a Card from the Deck:
+
+`POST /api/v1/drewCardFromDeck`
+
+```json
+{
+    "gameId": "f5cff83a-11d8-4cc3-972b-5d27e0bc00d9",
+    "player": "juan123"
+}
+```
+**Description**: If a user cannot play any of his cards, what he can do is to draw a card from the card pile, and add it to his deck, once this happens his turn ends, he must enter the game id and username of the player who will draw cards in his respective turn, he should receive a status code 200, showing also a success message.
+
+### Players Must Say "UNO" When Having a Remaining Card:
+
+`POST /api/v1/sayUno`
+
+```json
+{
+    "gameId": "2ce66004-a1d1-45dc-83ac-eb94a272b995",
+    "player": "daynor123",
+    "action": "say uno"
+}
+```
+**Description**: When a player has only one card he must say UNO because if he does not say one, other users could challenge the user who did not say one, besides it is necessary to say UNO to win a game when a player runs out of cards, because if he runs out of cards and did not say UNO, he will not be able to win.
+
+### Players May Challenge Others for Not Saying “UNO":
+
+`POST /api/v1/challengePlayer`
+
+```json
+{
+    "gameId": "2ce66004-a1d1-45dc-83ac-eb94a272b995",
+    "challenger": "juan123",
+    "challengedPlayer": "daynor123"
+}
+```
+**Description**: If a player forgot to say UNO when he only had one card another user in the game can challenge the player, so that 2 cards are added to the challenged player's deck.
+
+
+### Player's Turn Ends After Playing or Drawing a Card
+
+
+**Description**: Each player's turn ends when he successfully plays a card or when he draws a card since he cannot play any of his cards, showing after these plays the username of the next player in turn.
+
+
+### Ending the Game when running out of Cards:
+
+**Description**: After a card play it is verified if there is a player with 0 score, when a player has 0 score it means that he has run out of cards, it is the indication to indicate that he won the game, then when there is a winner it will show the message inciting the player and also a list of all the scores.
+
+###  Players Can See Current Game Status:
+
+`GET /api/v1/statusGame`
+
+```json
+{
+   "gameId": "2ce66004-a1d1-45dc-83ac-eb94a272b995"
+}
+```
+**Description**: The players of the game can see the general status of the game including the current user in turn, the card on the top of the card pile, the card decks of each of the attendees to the game, and finally the history of moves made by each user, just enter the game id and you will receive a status code 200 with all of the above.
+
+###  Players Can View Their Own Cards During the Game:
+
+`GET /api/v1/userCards`
+
+```json
+{
+   "gameId": "2ce66004-a1d1-45dc-83ac-eb94a272b995",
+   "player": "daynor123"
+}
+```
+**Description**: Players in a game can see their current cards they have in the deck, with their respective colors and values.
+
+###  Players Can View the Movement History in the Game:
+
+`GET /api/v1/historyGame`
+
+```json
+{
+    "gameId": "2ce66004-a1d1-45dc-83ac-eb94a272b995"
+}
+```
+**Description**: Players can view the move history of the game with the game id, this history includes moves or draw from the stock if a card is not available to play.
+
+### Players Can View Current Scores of All Players:
+
+`GET /api/v1/scoresPlayers`
+
+```json
+{
+    "gameId": "2ce66004-a1d1-45dc-83ac-eb94a272b995"
+}
+```
+**Description**: Players can list the scores of each player at any time, these scores are based on the values of the cards they have at the time of the query, the best player will be the one who has a low score, because to win it is necessary to have 0 points, for this query is necessary to enter the id of the game and you will receive a list of all players in the game with their corresponding scores.
+
 
 ### Protected Endpoints
 
@@ -515,3 +646,6 @@ The logs are saved in two files:
 - **exceptions.log:** Stores logs of unhandled exceptions and critical errors. This file is crucial for tracking down bugs and issues that lead to application crashes or unexpected behaviors.
 
 These files can be found in the root directory of the project.
+
+
+
