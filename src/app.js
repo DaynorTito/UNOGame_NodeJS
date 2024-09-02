@@ -7,6 +7,7 @@ import authRouter from './routes/authRoutes.js';
 import attendeeRouter from './routes/attendeeRoutes.js';
 import discardRouter from './routes/discardsRoutes.js';
 import historyRouter from './routes/historyRoutes.js'
+import reqTrackingRouter from './routes/reqTrackingRoutes.js';
 import errorHandler from './middlewares/errorHandler.js';
 import { loggerRegister } from './middlewares/loggerMiddleware.js';
 import { memoizationMiddleware } from './middlewares/memoizeMiddleware.js';
@@ -22,7 +23,6 @@ export function initServer(port) {
     const app = express();
     app.use(express.json());
     app.use(loggerRegister);
-    app.use(memoization);
     app.use('/api/v1',cardRouter);
     app.use('/api/v1',gameRouter);
     app.use('/api/v1',scoreRouter);
@@ -31,6 +31,7 @@ export function initServer(port) {
     app.use('/api/v1',attendeeRouter);
     app.use('/api/v1',discardRouter);
     app.use('/api/v1',historyRouter);
+    app.use('/stats',reqTrackingRouter);
     app.use(errorHandler);
     app.listen(port, ()=> {
         console.log(`Server listenig on port ${port}`);

@@ -8,6 +8,7 @@ import {ScoreRepository} from '../models/repositories/ScoreRepository.js';
 import {UserPlayerRepository} from '../models/repositories/UserPlayerRepository.js';
 import { LoginHandler } from '../services/authentication/LoginHandler.js';
 import {HistoryRepository} from '../models/repositories/HistoryRepository.js';
+import { ApiUsageRepository } from '../models/repositories/ApiUsageRepository.js';
 
 import Attendee from '../models/attendee.js';
 import Game from '../models/game.js';
@@ -16,6 +17,7 @@ import DiscardCard from '../models/discardCard.js';
 import Score from '../models/score.js';
 import UserPlayer from '../models/userPlayer.js';
 import TurnHistory from '../models/turnHistory.js';
+import ApiUsage from '../models/apiUsage.js';
 
 const container = createContainer();
 
@@ -27,6 +29,7 @@ container.register({
     scoreModel: asValue(Score),
     userPlayerModel: asValue(UserPlayer),
     historyModel: asValue(TurnHistory),
+    apiUsageModel: asValue(ApiUsage),
     attendeeRepository: asClass(AttendeeRepository).singleton(),
     gameRepository: asClass(GameRepository).singleton(),
     cardRepository: asClass(CardRepository).singleton(),
@@ -34,6 +37,7 @@ container.register({
     scoreRepository: asClass(ScoreRepository).singleton(),
     userPlayerRepository: asClass(UserPlayerRepository).singleton(),
     historyRepository: asClass(HistoryRepository).singleton(),
+    apiUsageRepository: asClass(ApiUsageRepository).singleton(),
     loginHandler: asClass(LoginHandler).singleton()
 });
 
