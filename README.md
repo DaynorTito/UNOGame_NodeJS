@@ -647,4 +647,37 @@ The logs are saved in two files:
 These files can be found in the root directory of the project.
 
 
+## Cache
 
+
+A middleware was implemented where a cache memory is managed.CacheMiddleware is a custom middleware for caching API responses to improve performance on repeated requests. The middleware implements an in-memory cache with configurable settings for cache expiration and maximum size. It uses the Least Recently Used (LRU) policy to manage cache entries, ensuring that the most frequently accessed items are retained while older and less frequently accessed items are removed.
+
+### Features
+- Configurable Cache Settings: Customize the cache's maximum size (max) and expiration time (maxAge) via a JSON configuration object.
+- LRU Cache Policy: Implements a Least Recently Used (LRU) eviction policy to remove the oldest cache entries when the cache size limit is reached.
+- Automatic Cache Expiration: Automatically expires cache entries based on a configurable expiration time (maxAge).
+- Manual Cache Implementation: Does not rely on external caching libraries, ensuring a custom, lightweight solution.
+
+### How It Works
+- Cache Key Generation: Generates a unique cache key based on the HTTP method and request URL.
+- Cache Lookup: Checks if a cached response exists for the generated key. If it exists and hasn't expired, it serves the cached response, resetting the expiration time.
+- Cache Expiry Handling: If the cached entry has expired, it is removed from the cache.
+- Cache Addition: If no cache exists for the key, the response is stored in the cache with a new expiration time after it is processed.
+- LRU Eviction Policy: When the maximum cache size is reached, the least recently used (oldest) entry is removed from the cache.
+
+### Configuration
+You can configure the CacheMiddleware using a JSON object to specify the cache settings:
+
+```json
+   {
+   "max": 50,       // Maximum number of items in the cache
+   "maxAge": 30000  // Cache expiration time in milliseconds (e.g., 30 seconds)
+   }
+```
+- max: The maximum number of items allowed in the cache. When this limit is reached, the oldest entries are removed according to the LRU policy.
+- maxAge: The duration (in milliseconds) for which a cached entry remains valid. After this period, the entry is considered expired.
+
+1. When a request is made to the API, the middleware checks if a cached response exists for the request.
+2. If a valid cached response exists, it is returned immediately, reducing response time.
+3. If no cache exists or the cached response has expired, the middleware processes the request as usual, caches the new response and returns it to the client.
+4. The middleware effectively manages the size and expiration of the cache by deleting expired entries and enforcing the LRU policy when the cache limit is reached.

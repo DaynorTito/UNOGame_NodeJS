@@ -9,12 +9,20 @@ import discardRouter from './routes/discardsRoutes.js';
 import historyRouter from './routes/historyRoutes.js'
 import errorHandler from './middlewares/errorHandler.js';
 import { loggerRegister } from './middlewares/loggerMiddleware.js';
+import { memoizationMiddleware } from './middlewares/memoizeMiddleware.js';
+
+const memoizationConfig = {
+    max: 50,
+    maxAge: 30000
+};
+
+const memoization= memoizationMiddleware(memoizationConfig);
 
 export function initServer(port) {
     const app = express();
     app.use(express.json());
     app.use(loggerRegister);
-
+    app.use(memoization);
     app.use('/api/v1',cardRouter);
     app.use('/api/v1',gameRouter);
     app.use('/api/v1',scoreRouter);
