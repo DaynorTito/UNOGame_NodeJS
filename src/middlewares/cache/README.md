@@ -34,3 +34,29 @@ this.cacheManager = new CacheManager(100, 60000); // Cache up to 100 items, with
 
 This function was implemented in the repository of letters, since the data that are stored in the database never change values or actuanlizan or deleted, so before making a find the model is checked if you already have in cache this value, if so does not return if you should not make the query.
 
+
+## Examples
+
+If we list all cards with endpoint we can see a message indicate, response was get with CACHE e.g.
+![alt text](image.png)
+
+
+Console message:
+
+![alt text](image-1.png)
+
+If we get the top card pile for twice we can see the CACHE is used too
+
+![alt text](image-2.png)
+
+Console Message:
+![alt text](image-3.png)
+
+
+If we can see the status game, with all deatils related of it, eg All cards of each user player, if this informacion already do before, Just return this information in order to do a query database.
+
+![alt text](image-4.png)
+
+In the console, we can see that Cache infomartion about cards is using
+
+![alt text](image-5.png)
