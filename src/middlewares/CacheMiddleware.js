@@ -11,6 +11,7 @@ export class CacheMiddleware {
         this.cache = new Map();
         this.max = config.max || 50;
         this.maxAge = config.maxAge || 30000;
+        this.cacheableRoutes = ['/cards'];  // Rutas específicas que deben ser cacheadas
     }
 
     /**
@@ -21,35 +22,31 @@ export class CacheMiddleware {
      * @param {Function} next - The next middleware function to call.
      */
     handle(req, res, next) {
+        if (!this.cacheableRoutes.some(route => req.originalUrl.startsWith(route))) {
+            return next();
+        }
+
         const key = `${req.method}-${req.originalUrl}`;
 
-        // Check if the cache has a valid entry for the current request
         if (this.cache.has(key)) {
             const { value, expiry } = this.cache.get(key);
-            console.log(`[CACHE] Cache find for key: ${key}`);
+            console.log(`[CACHE] Cache found for key: ${key}`);
 
-            // If the cached entry is still valid (not expired)
             if (expiry > Date.now()) {
-                // Refresh the cache expiry time
                 this.cache.set(key, { value, expiry: Date.now() + this.maxAge });
 
                 res.setHeader('Content-Type', 'application/json');
-                
-                res.send(value); 
-                return;
+                return res.send(value);
             } else {
-                // If the cached entry has expired, remove it from the cache
-                console.log(`[CACHE] Cache expired key: ${key}`);
+                console.log(`[CACHE] Cache expired for key: ${key}`);
                 this.cache.delete(key);
             }
         }
 
-        // Save the original send function of the response object
         const originalSend = res.send.bind(res);
 
         res.send = (body) => {
             if (this.cache.size >= this.max) {
-                // Remove the oldest entry (LRU policy)
                 const oldestKey = this.cache.keys().next().value;
                 this.cache.delete(oldestKey);
             }
@@ -57,10 +54,22 @@ export class CacheMiddleware {
             console.log(`[CACHE] New key in cache: ${key}`);
 
             this.cache.set(key, { value: body, expiry: Date.now() + this.maxAge });
-
             originalSend(body);
         };
 
         next();
+    }
+
+    /**
+     * Invalidate cache for a specific key.
+     * This can be used when the data changes and the cache needs to be refreshed.
+     * 
+     * @param {string} key - The key representing the cache entry to invalidate.
+     */
+    invalidate(key) {
+        if (this.cache.has(key)) {
+            console.log(`[CACHE] Invalidating key: ${key}`);
+            this.cache.delete(key);
+        }
     }
 }
