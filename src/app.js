@@ -17,7 +17,7 @@ const memoizationConfig = {
     maxAge: 30000
 };
 
-const memoization= memoizationMiddleware(memoizationConfig);
+const memoization = memoizationMiddleware(memoizationConfig);
 
 export function initServer(port) {
     const app = express();
