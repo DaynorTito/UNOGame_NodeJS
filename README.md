@@ -707,3 +707,66 @@ You can configure the CacheMiddleware using a JSON object to specify the cache s
 4. The middleware effectively manages the size and expiration of the cache by deleting expired entries and enforcing the LRU policy when the cache limit is reached.
 
 
+## API Documentation with Swagger
+
+Basic endpoint documentation has been implemented for the project. To view the Swagger graphical interface and test the documented endpoints, please navigate to the following URL:
+
+```bash
+http://localhost:3000/api-docs/#/
+```
+
+## Endpoints
+
+### Authentication
+
+- **POST** `/login` - Authenticate a user and obtain a JWT token.
+- **POST** `/logout` - Log out the user.
+
+### Games
+
+- **POST** `/games` - Create a new game.
+- **GET** `/games` - Retrieve all games.
+- **GET** `/games/:id` - Retrieve a specific game by ID.
+- **PUT** `/games/:id` - Update a game by ID.
+- **DELETE** `/games/:id` - Delete a game by ID.
+
+### Cards
+
+- **POST** `/cards` - Create a new card.
+- **GET** `/cards` - Retrieve all cards.
+- **GET** `/cards/:id` - Retrieve a specific card by ID.
+- **PUT** `/cards/:id` - Update a card by ID.
+- **DELETE** `/cards/:id` - Delete a card by ID.
+
+### Attendees
+
+- **POST** `/attendees` - Add an attendee to a game.
+- **POST** `/leave` - Leave an ongoing game.
+- **GET** `/attendees` - Retrieve all attendees.
+- **GET** `/attendees/:id` - Retrieve a specific attendee by ID.
+- **PUT** `/attendees/:id` - Update an attendee by ID.
+- **DELETE** `/attendees/:id` - Delete an attendee by ID.
+
+### Discards
+
+- **POST** `/discards` - Create a new discard.
+- **GET** `/discards` - Retrieve all discards.
+- **GET** `/discards/:id` - Retrieve a specific discard by ID.
+- **PUT** `/discards/:id` - Update a discard by ID.
+- **DELETE** `/discards/:id` - Delete a discard by ID.
+
+### Scores
+
+- **POST** `/scores` - Create a new score.
+- **GET** `/scores` - Retrieve all scores.
+- **GET** `/scores/:id` - Retrieve a specific score by ID.
+- **PUT** `/scores/:id` - Update a score by ID.
+- **DELETE** `/scores/:id` - Delete a score by ID.
+
+### Scores
+
+- **GET** `/requests` - Show all requests done in server.
+- **GET** `/response-times` - Show all response time of requests done in server.
+- **GET** `/status-codes` - Show all status code retrieve of the server.
+- **GET** `/popular-endpoints` - Show the most used enpoint in the server.
+
