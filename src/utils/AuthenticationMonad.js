@@ -39,25 +39,6 @@ class AuthenticationMonad {
     });
   }
 
-  async validateUsername(userPlayerRepository) {
-    const user = await userPlayerRepository.findOneByClause({
-      username: this.value,
-    });
-    if (!user) {
-      throw new UnauthorizedError("Invalid credentials");
-    }
-    this.user = user;
-    return this;
-  }
-
-  async validatePassword(password, userPlayerRepository) {
-    const isPasswordValid = await this.user.comparePassword(password);
-    if (!isPasswordValid) {
-      throw new UnauthorizedError("Invalid password");
-    }
-    return this;
-  }
-
   getResult() {
     return { token: this.token, decoded: this.decoded };
   }

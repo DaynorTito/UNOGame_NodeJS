@@ -9,6 +9,7 @@ import discardRouter from './routes/discardsRoutes.js';
 import historyRouter from './routes/historyRoutes.js'
 import reqTrackingRouter from './routes/reqTrackingRoutes.js';
 import errorHandler from './middlewares/errorHandler.js';
+import swaggerDocs from '../docs/swagger/swagger.js';
 import { loggerRegister } from './middlewares/loggerMiddleware.js';
 import { memoizationMiddleware } from './middlewares/memoizeMiddleware.js';
 
@@ -22,6 +23,7 @@ const memoization = memoizationMiddleware(memoizationConfig);
 export function initServer(port) {
     const app = express();
     app.use(express.json());
+    swaggerDocs(app);
     app.use(loggerRegister);
     app.use('/api/v1',cardRouter);
     app.use('/api/v1',gameRouter);
@@ -35,5 +37,6 @@ export function initServer(port) {
     app.use(errorHandler);
     app.listen(port, ()=> {
         console.log(`Server listenig on port ${port}`);
+        console.log(`Documentation available on http://localhost:${port}/api-docs`);
     });
 };

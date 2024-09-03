@@ -200,6 +200,30 @@ This project uses authentication based on JWT (JSON Web Tokens) to protect certa
 
 If you do not have a registered user, you can register with UserPlayer post endoint, described in the sections below.
 
+
+### Authentication Validation Monad
+This project implements a monadic approach for handling authentication in a Node.js backend application. The AuthenticationMonad class encapsulates the logic for validating user credentials and managing authentication tokens. This approach aims to streamline and modularize authentication operations, improving code readability and maintainability.
+
+
+### Authentication Monad
+The AuthenticationMonad class is a monadic implementation for handling token-based authentication in a Node.js application. It provides a fluent interface for validating and decoding JWT tokens, making the authentication process modular and easy to manage.
+
+### Authentication Monad
+The AuthenticationMonad class allows you to handle token validation and decoding in a chainable manner. It uses the flatMap method to enable method chaining and centralized error handling.
+
+#### Methods
+
+- **static of(token):** Initializes a new AuthenticationMonad instance with the provided token.
+
+- **flatMap(fn):** Applies the provided function to the current monad instance, handling errors that may occur.
+
+- **checkTokenExistence():** Checks if the token exists. If not, throws an UnauthorizedError.
+
+- **validateToken():** Validates the token using jwt.verify. If the token is invalid or expired, throws an UnauthorizedError.
+
+- **getResult():** Returns the result of the monadic operations, including the token and its decoded content.
+
+
 ## Main features
 
 To access any endpoint it is necessary to authenticate by logging in, or if not yet registered, register a user.
@@ -681,3 +705,5 @@ You can configure the CacheMiddleware using a JSON object to specify the cache s
 2. If a valid cached response exists, it is returned immediately, reducing response time.
 3. If no cache exists or the cached response has expired, the middleware processes the request as usual, caches the new response and returns it to the client.
 4. The middleware effectively manages the size and expiration of the cache by deleting expired entries and enforcing the LRU policy when the cache limit is reached.
+
+
