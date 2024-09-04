@@ -4,7 +4,9 @@ export class CardRepository extends ICardRepository {
 
     constructor({ cardModel }) {
         super({ cardModel });
-        this.cacheManager = new CacheManager(200, 180000);
+        this.cacheManager = new CacheManager(10000000, 180000);
+        this.cacheManager.invalidateAll();
+        this.cacheManager = new CacheManager(10000000, 180000);
     }
 
     async create(entity) {
@@ -23,7 +25,7 @@ export class CardRepository extends ICardRepository {
 
         const card = await this.CardModel.findByPk(id);
         this.cacheManager.set(cacheKey, card);
-        return card;
+        return card ;
     }
 
     async findAll() {
@@ -31,11 +33,11 @@ export class CardRepository extends ICardRepository {
         const cachedData = this.cacheManager.get(cacheKey);
         if (cachedData) {
             console.log(`[CACHE] Using cached cards data for findAll`);
-            return cachedData;
+            return [...cachedData];
         }
         const cards = await this.CardModel.findAll();
         this.cacheManager.set(cacheKey, cards);
-        return cards;
+        return [...cards];
     }
 
     async findAllByClause(whereClause) {
@@ -44,11 +46,11 @@ export class CardRepository extends ICardRepository {
 
         if (cachedData) {
             console.log(`[CACHE] Using cached data card for findAllByClause(${JSON.stringify(whereClause)})`);
-            return cachedData;
+            return [...cachedData];
         }
         const cards = await this.CardModel.findAll({ where: whereClause });
         this.cacheManager.set(cacheKey, cards);
-        return cards;
+        return [...cards];
     }
 
     async update(id, entity) {

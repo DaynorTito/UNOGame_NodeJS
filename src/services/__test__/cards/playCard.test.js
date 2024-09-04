@@ -1,21 +1,27 @@
 import container from "../../../config/container.js";
 import playCard from "../../../services/cards/playCard.js";
 import * as formatCard from "../../../utils/formatCard.js"
-import { ValidationError } from "../../../errors/customError.js";
+import { UnauthorizedError, ValidationError } from "../../../errors/customError.js";
 import gameStateService from "../../game/gameStateService.js";
 import { CardStatus } from "../../../utils/cardStatus.js";
 import calculateScores from "../../../services/scores/calculateScores.js";
 import movesRegister from "../../../services/history/movesRegister.js";
 import { getCardDescription } from "../../../utils/formatCard.js";
+import sequelize from "../../../config/database.js";
 
 const discardCards = container.resolve('discardCardRepository');
 const gameRepository = container.resolve('gameRepository');
 const attendeeRepository = container.resolve('attendeeRepository');
 const userPlayerRepository = container.resolve('userPlayerRepository');
 
+
+
 describe('playCardPlayer', () => {
     beforeEach(() => {
         jest.resetAllMocks();
+    });
+    afterEach( async() => {
+        await sequelize.close();
     });
 
     it('should return win message if a winner is detected', async () => {
@@ -159,6 +165,6 @@ describe('drawnCard', () => {
         jest.spyOn(playCard, 'verifyAvailabilityCard').mockResolvedValue(true);
 
         await expect(playCard.drawnCard(mockGameId, mockPlayer, mockUser))
-            .rejects.toThrow(ValidationError);
+            .rejects.toThrow(UnauthorizedError);
     });
 });

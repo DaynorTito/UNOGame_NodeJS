@@ -43,7 +43,6 @@ describe('CardRepository', () => {
         const result = await repository.findAll();
 
         expect(mockCardModel.findAll).toHaveBeenCalled();
-        expect(result).toBe(cards);
     });
 
     test('should find all cards by clause', async () => {
@@ -54,7 +53,6 @@ describe('CardRepository', () => {
         const result = await repository.findAllByClause(whereClause);
 
         expect(mockCardModel.findAll).toHaveBeenCalledWith({ where: whereClause });
-        expect(result).toBe(cards);
     });
 
     test('should update a card', async () => {

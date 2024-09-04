@@ -5,6 +5,7 @@ export const CardValues = Object.freeze({
     GREEN: 'Green',
     BLUE: 'Blue',
     WHILD_DRAW_FOUR: 'Wild Draw Four',
+    DRAW_FOUR: 'Draw Four',
     SKIP: 'Skip',
     REVERSE: 'Reverse',
     DRAW_TWO: 'Draw Two'

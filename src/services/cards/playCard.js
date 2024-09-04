@@ -11,6 +11,7 @@ import calculateScores from "../scores/calculateScores.js";
 import { VarifyTopCard } from "../validations/cardsValidation.js";
 import attendeeValidationService from "../validations/attendeeValidationService.js";
 import movesRegister from "../history/movesRegister.js";
+import playSpecialCard from "./playSpecialCard.js";
 
 const discardCards = container.resolve('discardCardRepository');
 
@@ -19,8 +20,6 @@ const playCardPlayer = async (gameId, player, cardPlayed, user) => {
     if(win) return { nextStep: win.message, playerCurrent: win.scoresArray};
     const playerCurrent = await nextPlaterTurn(gameId);
     const nextStep = await getCardTopCurrentData(cardPlayed, user, gameId, player);
-    console.log(nextStep)
-
     return { nextStep, playerCurrent };
 };
 
@@ -53,6 +52,9 @@ const getCardTopCurrentData = async (cardPlayed, user, gameId, player) => {
 
 const nextStepPlay = async (gameId, topCard, cardPlay, player) => {
     verifyCard(topCard, cardPlay);
+    if (playSpecialCard.isSpecial(cardPlay)) 
+        return playSpecialCard.espcialCard(gameId, topCard, cardPlay, player);
+    await playSpecialCard.espcialCard(gameId, topCard, cardPlay, player);
     await updatePlayCard({gameId, cardId: topCard.id}, false, CardStatus.USED);
     const newTop = await updatePlayCard({gameId, cardId: cardPlay.id}, true, CardStatus.UNUSED);
     const cardInf =  await getCardDescription(newTop.cardId);

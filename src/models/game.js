@@ -29,6 +29,10 @@ const Game = sequelize.define('Game', {
         type: DataTypes.INTEGER,
         defaultValue: 1
     },
+    clockwise: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+    },
     userCreatedId: {
         type: DataTypes.STRING,
         allowNull: true,

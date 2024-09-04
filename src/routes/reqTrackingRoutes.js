@@ -12,7 +12,7 @@ const router = Router();
 
 /**
  * @swagger
- * /api/v1/requests:
+ * /stats/requests:
  *   get:
  *     summary: Retrieve the current states of all tracked requests
  *     tags: [Request Tracking]
@@ -51,7 +51,7 @@ router.get('/requests', reqTrackingController.statesRequest);
 
 /**
  * @swagger
- * /api/v1/response-times:
+ * /stats/response-times:
  *   get:
  *     summary: Retrieve response times for all tracked requests
  *     tags: [Request Tracking]
@@ -84,7 +84,7 @@ router.get('/response-times', reqTrackingController.responseTime);
 
 /**
  * @swagger
- * /api/v1/status-codes:
+ * /stats/status-codes:
  *   get:
  *     summary: Retrieve the status codes of all tracked requests
  *     tags: [Request Tracking]
@@ -124,7 +124,7 @@ router.get('/status-codes', reqTrackingController.statusCodes);
 
 /**
  * @swagger
- * /api/v1/popular-endpoints:
+ * /stats/popular-endpoints:
  *   get:
  *     summary: Retrieve the most popular endpoints based on request count
  *     tags: [Request Tracking]

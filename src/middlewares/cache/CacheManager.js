@@ -1,6 +1,6 @@
 export class CacheManager {
 
-    constructor(maxSize = 100, maxAge = 30000) {
+    constructor(maxSize, maxAge) {
         this.cache = new Map();
         this.maxSize = maxSize;
         this.maxAge = maxAge;
