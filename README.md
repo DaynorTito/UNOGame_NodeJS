@@ -401,6 +401,20 @@ To access any endpoint it is necessary to authenticate by logging in, or if not 
 ```
 **Description**: Players can list the scores of each player at any time, these scores are based on the values of the cards they have at the time of the query, the best player will be the one who has a low score, because to win it is necessary to have 0 points, for this query is necessary to enter the id of the game and you will receive a list of all players in the game with their corresponding scores.
 
+## Special cards
+1. Player Shifts in Time Direction
+A game will be created by default with a clockwise attribute, which indicates that the game must go in that direction.
+
+2. Skip Cards (Skip).
+The skink cards will only skink once, run the function to get the next player, so that it updates to the next player.
+
+3. Reverse Letters.
+The cards in reverse will update the state of the game, specifically the attribute clockwise, because when you play one of these cards is changed in true and will be getting the users in reverse.
+
+4. Draw Cards If Unplayable
+Users can only draw cards if they do not have a card in their deck to play, if they have at least one valid card to play, they cannot draw cards, and when they draw a card from the deck, it ends their turn to play.
+
+Translated with DeepL.com (free version)
 
 ### Protected Endpoints
 

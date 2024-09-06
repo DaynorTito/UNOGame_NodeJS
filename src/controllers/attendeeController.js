@@ -4,7 +4,7 @@ import gameJoinService from "../services/game/gameJoinService.js";
 const createAttendee = async (req, res, next) => {
     try {
         const attendee = await gameJoinService.joinGame(req.body, req.user);
-        res.status(201).json({message: 'User joined the game successfully', userId: attendee.userId});
+        res.status(201).json({message: 'User joined the game successfully', userId: attendee.userId, attendeeId: attendee.id});
     } catch (error) {
         next(error);
     }

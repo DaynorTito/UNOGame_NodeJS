@@ -7,6 +7,7 @@
   "scripts": {
     "test": "jest --coverage",
     "dev": "node --watch src/index.js",
+    "e2e-test":"jest 'tests/'",
     "start": "node src/index.js",
     "lint": "eslint '**/*.js'"
   },

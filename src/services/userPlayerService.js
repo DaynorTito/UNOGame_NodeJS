@@ -31,7 +31,7 @@ const updateUserPlayerService = async (id, updateData) => {
 const deleteUserPlayerService = async(id) => {
     const user = await userPlayerRepository.findById(id);
     if (user) {
-        await userPlayerRepository.destroy(id);
+        await userPlayerRepository.delete(id);
         return true;
     }
     throw new NotFoundError('UserPlayer not found');
